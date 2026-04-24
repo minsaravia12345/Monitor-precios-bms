@@ -1,0 +1,25 @@
+# Archivos de texto
+*.txt
+
+# Archivos Excel (temporales y resultados)
+*.xlsx
+*.xls
+~$*.xlsx
+
+# Carpeta de resultados de scraping
+Resultados_scraping/
+
+# Código de prueba
+test_*.py
+
+# Caché de Python y entornos virtuales
+__pycache__/
+.pytest_cache/
+venv/
+.venv/
+env/
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SmartPrice Tracker</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #3b82f6;
+      --winner-bg: rgba(34, 197, 94, 0.15);
+      --winner-text: #4ade80;
+      --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .dashboard-container { max-width: 1400px; margin: 0 auto; }
+    .header { text-align: center; margin-bottom: 2rem; }
+    .title {
+      font-size: 3rem; font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f59e0b 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+
+    /* Stats */
+    .stats-bar { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .stat-card { background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem 1.5rem; text-align: center; min-width: 140px; }
+    .stat-num { font-size: 1.8rem; font-weight: 700; }
+    .stat-num.co { color: #93c5fd; }
+    .stat-num.fa { color: #f9a8d4; }
+    .stat-num.fo { color: #fcd34d; }
+    .stat-num.emp { color: #4ade80; }
+    .stat-label { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; }
+
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
+    .product-card {
+      background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border); border-radius: 16px; padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+    .product-group { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-color); font-weight: 600; }
+    .product-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.4; flex-grow: 1; }
+    .prices-container { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
+    .pharmacy-price {
+      display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem;
+      border-radius: 8px; background: rgba(0, 0, 0, 0.2); border: 1px solid transparent;
+      transition: all 0.2s ease; text-decoration: none; color: inherit;
+    }
+    .pharmacy-price:hover { background: rgba(0, 0, 0, 0.3); }
+    .pharmacy-name { font-weight: 500; font-size: 0.85rem; }
+    .pharmacy-price.winner { background: var(--winner-bg); border-color: rgba(74, 222, 128, 0.3); box-shadow: inset 0 0 15px rgba(74, 222, 128, 0.1); }
+    .price-details { text-align: right; }
+    .actual-price { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem; }
+    .actual-price.winner-text { color: var(--winner-text); }
+    .list-price { font-size: 0.75rem; text-decoration: line-through; color: var(--text-secondary); display: block; margin-top: 2px; }
+    .discount-badge { background: rgba(239, 68, 68, 0.2); color: #f87171; font-size: 0.65rem; padding: 2px 5px; border-radius: 4px; font-weight: 600; }
+    .card-footer { padding-top: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    .winner-badge { background: var(--winner-text); color: #064e3b; padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 0.7rem; }
+    .difference { color: var(--text-secondary); }
+    .filters { display: flex; gap: 0.8rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap; }
+    .filter-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-primary); padding: 0.5rem 1.2rem; border-radius: 20px; cursor: pointer; font-weight: 500; transition: all 0.2s; font-size: 0.9rem; }
+    .filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    .filter-btn.active { background: var(--accent-color); border-color: var(--accent-color); }
+    .product-card.killer-style {
+      border-color: #22c55e;
+      background: linear-gradient(to bottom right, rgba(34, 197, 94, 0.05), var(--card-bg));
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+    }
+    .product-card.killer-style .product-group {
+      color: #4ade80;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .product-card { animation: fadeIn 0.4s ease-out forwards; }
+    .currency::before { content: "$"; margin-right: 2px; }
+    .no-avail { opacity: 0.4; font-style: italic; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    const FARMACIAS = [
+      { key: "Central_Oeste", label: "Central Oeste", color: "#93c5fd" },
+      { key: "Farmacity",     label: "Farmacity",     color: "#f9a8d4" },
+      { key: "Farmaonline",   label: "Farmaonline",   color: "#fcd34d" },
+      { key: "MercadoLibre",   label: "MercadoLibre",   color: "#4ade80" },
+    ];
+
+    function App() {
+      const [productos, setProductos] = useState([]);
+      const [ultimaActualizacion, setUltimaActualizacion] = useState('');
+      const [tabActivo, setTabActivo] = useState('explorar'); // 'explorar' o 'killers'
+      const [filtroGrupo, setFiltroGrupo] = useState('Todos');
+      const [filtroGanador, setFiltroGanador] = useState('Todos');
+
+      useEffect(() => {
+        // Cache busting con timestamp para asegurar datos frescos
+        fetch(`datos_consolidados.json?t=${Date.now()}`)
+          .then(res => res.json())
+          .then(data => {
+            const listado = data.productos || data;
+            setUltimaActualizacion(data.ultima_actualizacion || '');
+            setProductos(listado.map(p => ({ ...p, Es_Killer: !!p.Es_Killer })));
+          })
+          .catch(err => console.error("Error cargando datos:", err));
+      }, []);
+
+      const grupos = useMemo(() => ['Todos', ...new Set(productos.map(p => p.Grupo))], [productos]);
+      
+      const productosFiltrados = useMemo(() => {
+        return productos.filter(p => {
+          const matchTab = tabActivo === 'killers' ? p.Es_Killer : true;
+          const matchGrupo = filtroGrupo === 'Todos' || p.Grupo === filtroGrupo;
+          const matchGanador = filtroGanador === 'Todos' || (p.Ganador && p.Ganador.includes(filtroGanador));
+          return matchTab && matchGrupo && matchGanador;
+        });
+      }, [productos, tabActivo, filtroGrupo, filtroGanador]);
+
+      // Stats
+      const stats = useMemo(() => {
+        const s = { total: productos.length, co: 0, fa: 0, fo: 0, ml: 0, empate: 0, killers: 0 };
+        productos.forEach(p => {
+          if (p.Es_Killer) s.killers++;
+          if (p.Ganador && p.Ganador.includes("Central")) s.co++;
+          else if (p.Ganador && p.Ganador.includes("Farmacity")) s.fa++;
+          else if (p.Ganador && p.Ganador.includes("Farmaonline")) s.fo++;
+          else if (p.Ganador && p.Ganador.includes("MercadoLibre")) s.ml++;
+          else if (p.Ganador === "Empate") s.empate++;
+        });
+        return s;
+      }, [productos]);
+
+      const formatearPrecio = (num) => {
+        if (!num || num === Infinity) return "-";
+        return new Intl.NumberFormat('es-AR').format(num);
+      }
+
+      const renderPharmacy = (prod, farmKey, farmLabel) => {
+        const pData = prod.Precios[farmKey];
+        const isWinner = prod.Ganador && prod.Ganador.includes(farmLabel.replace("_", " "));
+        
+        if (!pData) return (
+          <div className="pharmacy-price" key={farmKey}>
+            <span className="pharmacy-name">{farmLabel}</span>
+            <span className="no-avail">No disponible</span>
+          </div>
+        );
+
+        return (
+          <a href={pData.Link} target="_blank" rel="noreferrer" key={farmKey}
+             className={`pharmacy-price ${isWinner ? 'winner' : ''}`}>
+            <span className="pharmacy-name">{farmLabel}</span>
+            <div className="price-details">
+              <span className={`actual-price currency ${isWinner ? 'winner-text' : ''}`}>
+                {formatearPrecio(pData.Precio_Final)}
+                {pData.Descuento > 0 && <span className="discount-badge">-{pData.Descuento}%</span>}
+              </span>
+              {pData.Precio_Lista > pData.Precio_Final && (
+                <span className="list-price currency">{formatearPrecio(pData.Precio_Lista)}</span>
+              )}
+            </div>
+          </a>
+        );
+      };
+
+      return (
+        <div className="dashboard-container">
+          <header className="header">
+            <h1 className="title">SmartPrice Tracker</h1>
+            <p className="subtitle">Comparativa Multi-Farmacia & MercadoLibre</p>
+            {ultimaActualizacion && <p style={{fontSize:'0.8rem', opacity:0.7, marginTop:'5px'}}>Sincronizado: {ultimaActualizacion}</p>}
+          </header>
+
+          <div className="stats-bar">
+            <div className="stat-card" onClick={() => setTabActivo('explorar')} style={{cursor:'pointer', border: tabActivo === 'explorar' ? '1px solid var(--accent-color)' : ''}}>
+                <div className="stat-num" style={{color:'#f8fafc'}}>{stats.total}</div>
+                <div className="stat-label">Explorar Todo</div>
+            </div>
+            <div className="stat-card" onClick={() => setTabActivo('killers')} style={{cursor:'pointer', border: tabActivo === 'killers' ? '1px solid #4ade80' : ''}}>
+                <div className="stat-num" style={{color:'#4ade80'}}>{stats.killers}</div>
+                <div className="stat-label">Killers (Estrategia)</div>
+            </div>
+            <div className="stat-card"><div className="stat-num co">{stats.co}</div><div className="stat-label">CO</div></div>
+            <div className="stat-card"><div className="stat-num fa">{stats.fa}</div><div className="stat-label">Fcty</div></div>
+            <div className="stat-card"><div className="stat-num fo">{stats.fo}</div><div className="stat-label">FO</div></div>
+            <div className="stat-card"><div className="stat-num ml" style={{color:'#22c55e'}}>{stats.ml}</div><div className="stat-label">ML</div></div>
+          </div>
+
+          <div className="filters">
+            <div style={{display:'flex', gap:'10px', alignItems:'center', background:'var(--card-bg)', padding:'5px 15px', borderRadius:'30px', border:'1px solid var(--card-border)'}}>
+                <button className={`filter-btn ${tabActivo === 'explorar' ? 'active' : ''}`} onClick={() => setTabActivo('explorar')}>Explorar Todo</button>
+                <button className={`filter-btn ${tabActivo === 'killers' ? 'active' : ''}`} onClick={() => setTabActivo('killers')} style={{borderColor: tabActivo === 'killers' ? '#22c55e' : ''}}>Pestaña Killers</button>
+            </div>
+
+            <select className="filter-btn" value={filtroGrupo} onChange={(e) => setFiltroGrupo(e.target.value)}>
+              {grupos.map(g => <option key={g} value={g}>{g}</option>)}
+            </select>
+            
+            <button className={`filter-btn ${filtroGanador === 'Todos' ? 'active' : ''}`} onClick={() => setFiltroGanador('Todos')}>Cualquier Ganador</button>
+            <button className={`filter-btn ${filtroGanador === 'MercadoLibre' ? 'active' : ''}`} onClick={() => setFiltroGanador('MercadoLibre')}>Gana ML</button>
+          </div>
+
+          <div className="products-grid">
+            {productosFiltrados.map((prod, idx) => (
+              <div className={`product-card ${prod.Es_Killer ? 'killer-style' : ''}`} key={prod.Id} style={{ animationDelay: `${idx * 0.02}s` }}>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem'}}>
+                  <span className="product-group">{prod.Es_Killer ? '🎯 Killer Item' : prod.Grupo}</span>
+                  {prod.EAN && prod.EAN !== 'N/A' && (
+                    <span style={{fontSize: '0.65rem', background: 'rgba(255,255,255,0.1)', padding: '2px 6px', borderRadius: '4px', color: 'var(--text-secondary)'}}>
+                      EAN: {prod.EAN}
+                    </span>
+                  )}
+                </div>
+                <h3 className="product-name">{prod.Nombre}</h3>
+                
+                <div className="prices-container">
+                  {FARMACIAS.map(f => renderPharmacy(prod, f.key, f.label))}
+                </div>
+
+                <div className="card-footer">
+                  <span className="winner-badge">{prod.Ganador === 'Empate' ? 'Empate' : `Gana ${prod.Ganador}`}</span>
+                  {prod.Diferencia_Porcentual > 0 && (
+                    <span className="difference">Ahorro Máx: {prod.Diferencia_Porcentual}%</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
