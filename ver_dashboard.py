@@ -17,7 +17,7 @@ class MyServer(socketserver.TCPServer):
 def run_server():
     try:
         with MyServer(("", PORT), Handler) as httpd:
-            print(f"Sirviendo el Dashboard sin usar NodeJS en http://localhost:{PORT}/dashboard.html")
+            print(f"Sirviendo el Dashboard sin usar NodeJS en http://localhost:{PORT}/")
             httpd.serve_forever()
     except OSError as e:
         print(f"Error al iniciar el servidor (tal vez el puerto {PORT} esta en uso). Detalles: {e}")
@@ -28,7 +28,7 @@ server_thread.start()
 
 # Esperar un segundo y abrir navegador
 time.sleep(1)
-webbrowser.open(f"http://localhost:{PORT}/dashboard.html")
+webbrowser.open(f"http://localhost:{PORT}/")
 
 print("\nPresiona CTRL+C para cerrar el dashboard y apagar el servidor.")
 try:
