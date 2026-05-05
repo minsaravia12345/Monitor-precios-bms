@@ -118,9 +118,18 @@ if os.path.exists(ARCHIVO_KILLERS):
                             target_sku = res_item['items'][0]
                             ean_api = str(target_sku.get('ean', ean)).strip()
                             offer = target_sku['sellers'][0]['commertialOffer']
-                            p_final = int(float(offer.get('Price', 0)))
-                            p_lista = int(float(offer.get('ListPrice', 0)))
-                        except: p_final, p_lista = 0, 0
+                            
+                            qty = int(offer.get('AvailableQuantity', 0))
+                            if qty == 0:
+                                p_final = "Sin Stock"
+                                p_lista = "Sin Stock"
+                                porcentaje_oferta = 0
+                            else:
+                                p_final = int(float(offer.get('Price', 0)))
+                                p_lista = int(float(offer.get('ListPrice', 0)))
+                                porcentaje_oferta = round(((p_lista - p_final) / p_lista * 100), 2) if p_lista > p_final else 0
+                                
+                        except: p_final, p_lista, porcentaje_oferta = 0, 0, 0
                         
                         productos_extraidos.append({
                             'Grupo': 'Killers-Targeted',
@@ -130,7 +139,7 @@ if os.path.exists(ARCHIVO_KILLERS):
                             'Nombre': nombre,
                             'Precio_Lista': p_lista,
                             'Precio_Final': p_final,
-                            'Porcentaje_Oferta': round(((p_lista - p_final) / p_lista * 100), 2) if p_lista > p_final else 0,
+                            'Porcentaje_Oferta': porcentaje_oferta,
                             'Link': link
                         })
                     else:
@@ -143,6 +152,76 @@ if os.path.exists(ARCHIVO_KILLERS):
         print(f"Error en Fase 2: {e}")
 else:
     print("Archivo de Killers no encontrado. Saltando Fase 2.")
+
+# --- FASE 3: URLs DE FALLBACK MANUAL ---
+print("\n--- FASE 3: PROCESANDO URLs DE FALLBACK MANUAL ---")
+ARCHIVO_FALLBACK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "killers_urls_fallback.xlsx")
+if os.path.exists(ARCHIVO_FALLBACK):
+    try:
+        df_fb = pd.read_excel(ARCHIVO_FALLBACK)
+        if not df_fb.empty and 'Farmacia' in df_fb.columns and 'URL' in df_fb.columns:
+            df_fb = df_fb[df_fb['Farmacia'].str.lower().str.contains('farmaonline', na=False)]
+            print(f"Se encontraron {len(df_fb)} URLs de Fallback para Farmaonline.")
+            
+            for _, row in df_fb.iterrows():
+                ean = str(row.get('EAN', '')).strip()
+                url_fb = str(row.get('URL', '')).strip()
+                if not url_fb or url_fb == 'nan': continue
+                
+                print(f"  -> Procesando URL Fallback para EAN {ean}: {url_fb}")
+                
+                if "/p" in url_fb:
+                    slug = url_fb.split("/")[-2] if url_fb.endswith("/p") else url_fb.split("/p")[0].split("/")[-1]
+                    api_url = f"https://www.farmaonline.com/api/catalog_system/pub/products/search/{slug}/p"
+                else:
+                    slug = url_fb.strip("/").split("/")[-1]
+                    api_url = f"https://www.farmaonline.com/api/catalog_system/pub/products/search/{slug}/p"
+                    
+                try:
+                    res = session.get(api_url, timeout=10)
+                    if res.status_code in [200, 206] and res.json():
+                        res_item = res.json()[0]
+                        nombre = res_item.get('productName', '')
+                        link = res_item.get('link', url_fb)
+                        
+                        try:
+                            target_sku = res_item['items'][0]
+                            ean_api = str(target_sku.get('ean', ean)).strip()
+                            offer = target_sku['sellers'][0]['commertialOffer']
+                            
+                            qty = int(offer.get('AvailableQuantity', 0))
+                            if qty == 0:
+                                p_final = "Sin Stock"
+                                p_lista = "Sin Stock"
+                                porcentaje_oferta = 0
+                            else:
+                                p_final = int(float(offer.get('Price', 0)))
+                                p_lista = int(float(offer.get('ListPrice', 0)))
+                                porcentaje_oferta = round(((p_lista - p_final) / p_lista * 100), 2) if p_lista > p_final else 0
+                            
+                            productos_extraidos.append({
+                                'Grupo': 'Killers-Fallback',
+                                'Farmacia': 'Farmaonline',
+                                'Fecha': datetime.now().strftime("%Y-%m-%d"),
+                                'EAN': ean_api if ean_api != 'N/A' else ean,
+                                'Nombre': nombre,
+                                'Precio_Lista': p_lista,
+                                'Precio_Final': p_final,
+                                'Porcentaje_Oferta': porcentaje_oferta,
+                                'Link': link
+                            })
+                            print(f"     [OK] Encontrado vía Fallback: {nombre}")
+                        except: pass
+                    else:
+                        print(f"     [!] No se pudo obtener datos de la API para el slug: {slug}")
+                except Exception as e:
+                    print(f"     [!] Error consultando API de Fallback: {e}")
+        else:
+            print("Archivo de Fallback vacío o sin columnas requeridas.")
+    except Exception as e:
+        print(f"Error en Fase 3: {e}")
+else:
+    print("Archivo de Fallback no encontrado. Saltando Fase 3.")
 
 # --- GUARDAR ---
 if productos_extraidos:

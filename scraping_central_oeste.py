@@ -185,27 +185,33 @@ if os.path.exists(ARCHIVO_KILLERS):
                     
                     precio_final = 0
                     precio_lista = 0
-                    try:
-                        price_box = item.find_element(By.XPATH, ".//div[contains(@class, 'price-box')]")
-                        try:
-                            txt_final = price_box.find_element(By.XPATH, ".//span[@data-price-type='finalPrice']//span[@class='price']").text
-                            precio_final = limpiar_precio(txt_final)
-                        except:
-                            try:
-                                txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
-                                precio_final = limpiar_precio(txt_final)
-                            except: pass
-                            
-                        try:
-                            txt_old = price_box.find_element(By.XPATH, ".//span[@data-price-type='oldPrice']//span[@class='price']").text
-                            precio_lista = limpiar_precio(txt_old)
-                        except:
-                            precio_lista = precio_final
-                    except: pass
-                    
                     porcentaje_oferta = 0
-                    if precio_lista > 0 and precio_final < precio_lista:
-                        porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
+                    
+                    try:
+                        item.find_element(By.CSS_SELECTOR, ".stock.unavailable")
+                        precio_final = "Sin Stock"
+                        precio_lista = "Sin Stock"
+                    except:
+                        try:
+                            price_box = item.find_element(By.XPATH, ".//div[contains(@class, 'price-box')]")
+                            try:
+                                txt_final = price_box.find_element(By.XPATH, ".//span[@data-price-type='finalPrice']//span[@class='price']").text
+                                precio_final = limpiar_precio(txt_final)
+                            except:
+                                try:
+                                    txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
+                                    precio_final = limpiar_precio(txt_final)
+                                except: pass
+                                
+                            try:
+                                txt_old = price_box.find_element(By.XPATH, ".//span[@data-price-type='oldPrice']//span[@class='price']").text
+                                precio_lista = limpiar_precio(txt_old)
+                            except:
+                                precio_lista = precio_final
+                        except: pass
+                        
+                        if precio_lista > 0 and precio_final < precio_lista:
+                            porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
                         
                     sku = "N/A"
                     try:
@@ -235,6 +241,84 @@ if os.path.exists(ARCHIVO_KILLERS):
         print(f"Error en Fase 2: {e}")
 else:
     print("Archivo de Killers no encontrado. Saltando Fase 2.")
+
+# --- FASE 3: URLs DE FALLBACK MANUAL ---
+print("\n--- FASE 3: PROCESANDO URLs DE FALLBACK MANUAL ---")
+ARCHIVO_FALLBACK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "killers_urls_fallback.xlsx")
+if os.path.exists(ARCHIVO_FALLBACK):
+    try:
+        df_fb = pd.read_excel(ARCHIVO_FALLBACK)
+        if not df_fb.empty and 'Farmacia' in df_fb.columns and 'URL' in df_fb.columns:
+            df_fb = df_fb[df_fb['Farmacia'].str.lower().str.contains('central', na=False)]
+            print(f"Se encontraron {len(df_fb)} URLs de Fallback para Central Oeste.")
+            
+            for _, row in df_fb.iterrows():
+                ean = str(row.get('EAN', '')).strip()
+                url_fb = str(row.get('URL', '')).strip()
+                if not url_fb or url_fb == 'nan': continue
+                
+                print(f"  -> Procesando URL Fallback para EAN {ean}: {url_fb}")
+                driver.get(url_fb)
+                
+                try:
+                    # Intentar extraer datos de la PDP
+                    try:
+                        nombre = driver.find_element(By.XPATH, "//span[@itemprop='name']").text.strip()
+                    except:
+                        try:
+                            nombre = driver.find_element(By.CSS_SELECTOR, ".page-title span").text.strip()
+                        except:
+                            nombre = f"Producto Fallback {ean}"
+                            
+                    precio_final = 0
+                    precio_lista = 0
+                    porcentaje_oferta = 0
+                    
+                    try:
+                        driver.find_element(By.CSS_SELECTOR, ".stock.unavailable")
+                        precio_final = "Sin Stock"
+                        precio_lista = "Sin Stock"
+                    except:
+                        try:
+                            price_box = driver.find_element(By.CSS_SELECTOR, ".product-info-main .price-box")
+                            try:
+                                txt_final = price_box.find_element(By.CSS_SELECTOR, "[data-price-type='finalPrice'] .price").text
+                                precio_final = limpiar_precio(txt_final)
+                            except:
+                                try:
+                                    txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
+                                    precio_final = limpiar_precio(txt_final)
+                                except: pass
+                                
+                            try:
+                                txt_old = price_box.find_element(By.CSS_SELECTOR, "[data-price-type='oldPrice'] .price").text
+                                precio_lista = limpiar_precio(txt_old)
+                            except:
+                                precio_lista = precio_final
+                        except: pass
+                        
+                        if precio_lista > 0 and precio_final < precio_lista:
+                            porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
+                        
+                    productos_extraidos.append({
+                        'Grupo': 'Killers-Fallback',
+                        'Fecha': datetime.now().strftime("%Y-%m-%d"),
+                        'EAN': ean,
+                        'Nombre': nombre,
+                        'Precio_Lista': precio_lista,
+                        'Precio_Final': precio_final,
+                        'Porcentaje_Oferta': porcentaje_oferta,
+                        'Link': url_fb
+                    })
+                    print(f"     [OK] Encontrado vía Fallback: {nombre}")
+                except Exception as e:
+                    print(f"     [!] Error procesando URL Fallback: {e}")
+        else:
+            print("Archivo de Fallback vacío o sin columnas requeridas.")
+    except Exception as e:
+        print(f"Error en Fase 3: {e}")
+else:
+    print("Archivo de Fallback no encontrado. Saltando Fase 3.")
 
 driver.quit()
 

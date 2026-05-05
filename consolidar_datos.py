@@ -110,15 +110,17 @@ for k, v in productos_dict.items():
         datos_farm = precios.get(nombre, {})
         pf = datos_farm.get("Precio_Final", float('inf'))
         # Limpieza básica de precio
-        try:
-            pf = float(pf)
-        except:
-            pf = float('inf')
-            
-        if pf and pf > 0 and pf != float('inf'):
-            precios_validos[nombre] = pf
-        else:
+        if str(pf).strip().lower() == "sin stock":
             precios_validos[nombre] = float('inf')
+        else:
+            try:
+                pf = float(pf)
+                if pf > 0 and pf != float('inf'):
+                    precios_validos[nombre] = pf
+                else:
+                    precios_validos[nombre] = float('inf')
+            except:
+                precios_validos[nombre] = float('inf')
 
     # Encontrar el menor precio
     farmacias_con_precio = {n: p for n, p in precios_validos.items() if p != float('inf')}
