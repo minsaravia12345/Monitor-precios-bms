@@ -1,250 +1,270 @@
 import time
-import json
 import os
 import re
 from datetime import datetime
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from webdriver_manager.chrome import ChromeDriverManager
+import requests
+from bs4 import BeautifulSoup
+import urllib.parse
 
-# --- 1. CONFIGURACIÓN ---
-ARCHIVO_INPUT = r"C:\Users\b_saravia\Downloads\Listado URL - colecciones Central oeste.xlsx" 
-ARCHIVO_KILLERS = r"C:\Users\b_saravia\OneDrive - Farmacity\Documents\Precios MercadoLibre.xlsx"
+# --- CONFIGURACIÓN ---
+ARCHIVO_KILLERS = r"C:\Users\b_saravia\OneDrive - Farmacity\Documents\skillers\Killers evento.xlsx"
+ARCHIVO_FALLBACK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "killers_urls_fallback.xlsx")
+
+# Cargar URLs de fallback para usarlas como prioridad
+urls_prioridad = {}
+if os.path.exists(ARCHIVO_FALLBACK):
+    try:
+        df_fb_cache = pd.read_excel(ARCHIVO_FALLBACK)
+        # Filtrar solo para esta farmacia
+        df_fb_cache = df_fb_cache[df_fb_cache['Farmacia'].str.lower().str.contains('central', na=False)]
+        for _, row in df_fb_cache.iterrows():
+            ean_fb = str(row.get('EAN', '')).strip()
+            nom_fb = str(row.get('Nombre', '')).strip()
+            url_fb = str(row.get('URL', '')).strip()
+            if url_fb and url_fb != 'nan':
+                # Usamos una llave combinada para ser ultra precisos
+                urls_prioridad[f"{ean_fb}_{nom_fb}"] = url_fb
+    except: pass
 
 def limpiar_precio(texto):
     if not texto: return 0
-    # En Magento viene tipo "$ 15.000,00" -> Dejamos solo números
-    solo_numeros = re.sub(r'\D', '', texto)
+    solo_numeros = re.sub(r'\D', '', str(texto))
     if not solo_numeros: return 0
-    # Eliminamos los últimos 2 dígitos (centavos)
     try:
-        return int(solo_numeros[:-2])
+        # Los precios en Central Oeste suelen tener 2 decimales (ej: $ 1.234,00 -> 123400 -> 1234)
+        # Si el texto original NO tiene coma ni punto antes de los ultimos 2 digitos, cuidado, pero BeautifulSoup saca el texto limpio.
+        if ',' in str(texto) or '.' in str(texto):
+             return int(solo_numeros[:-2])
+        return int(solo_numeros)
     except:
         return 0
 
-# --- 2. INICIO DRIVER ---
-chrome_options = Options()
-chrome_options.add_argument("--headless") # Agregado para ejecución en servidor/agente
-chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--disable-notifications")
-chrome_options.add_argument("--start-maximized")
+# --- INICIO REQUESTS ---
+session = requests.Session()
+session.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'es-AR,es;q=0.8,en-US;q=0.5,en;q=0.3',
+})
 
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=chrome_options)
-
-print("--- INICIANDO SCRAPER (MODO MAGENTO) ---")
-
-try:
-    df_input = pd.read_excel(ARCHIVO_INPUT)
-    if 'URL' not in df_input.columns:
-        print("Error: Falta columna 'URL' en el Excel.")
-        driver.quit()
-        exit()
-    lista_input = df_input.to_dict('records')
-except Exception as e:
-    print(f"Error leyendo Excel: {e}")
-    driver.quit()
-    exit()
+print("--- INICIANDO SCRAPER CENTRAL OESTE (DIRECTO A KILLERS) ---")
+print("-> MODO ULTRA RÁPIDO (SIN SELENIUM)")
 
 productos_extraidos = []
 
-for i, fila in enumerate(lista_input):
-    url_base = fila['URL']
-    grupo = fila.get('GRUPO', 'General')
-    
-    print(f"\n[{i+1}/{len(lista_input)}] Procesando: {grupo}")
-    
-    if "?p=" in url_base: url_base = url_base.split("?p=")[0]
-    
-    paginas_a_revisar = 10
-    
-    for pag in range(1, paginas_a_revisar + 1):
-        target_url = f"{url_base}?p={pag}"
-        print(f" -> Navegando Pág {pag}: {target_url}")
-        
-        driver.get(target_url)
-        
-        try:
-            xpath_items = "//ol[contains(@class, 'product-items')]//li[contains(@class, 'product-item')]"
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath_items)))
-        except TimeoutException:
-            print("    [!] No se encontraron productos o fin de paginación.")
-            break
-            
-        items = driver.find_elements(By.XPATH, xpath_items)
-        if not items: break
-        
-        print(f"    Encontrados: {len(items)} productos.")
-        
-        for item in items:
-            try:
-                # 1. Nombre y Link
-                elem_link = item.find_element(By.XPATH, ".//a[contains(@class, 'product-item-link')]")
-                nombre = elem_link.text.strip()
-                link = elem_link.get_attribute("href")
-                
-                # 2. Precios
-                precio_final = 0
-                precio_lista = 0
-                
-                try:
-                    price_box = item.find_element(By.XPATH, ".//div[contains(@class, 'price-box')]")
-                    
-                    # Intento Precio Final
-                    try:
-                        txt_final = price_box.find_element(By.XPATH, ".//span[@data-price-type='finalPrice']//span[@class='price']").text
-                        precio_final = limpiar_precio(txt_final)
-                    except:
-                        try:
-                            txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
-                            precio_final = limpiar_precio(txt_final)
-                        except:
-                            precio_final = 0
-
-                    # Intento Precio Lista (Tachado)
-                    try:
-                        txt_old = price_box.find_element(By.XPATH, ".//span[@data-price-type='oldPrice']//span[@class='price']").text
-                        precio_lista = limpiar_precio(txt_old)
-                    except:
-                        precio_lista = precio_final 
-                except:
-                    precio_final = 0
-                    precio_lista = 0
-
-                # --- 3. CÁLCULO DE PORCENTAJE DE OFERTA ---
-                porcentaje_oferta = 0
-                if precio_lista > 0 and precio_final < precio_lista:
-                    # Calculamos el % de descuento (ej: 25.0)
-                    porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
-
-                # 4. SKU
-                sku = "N/A"
-                try:
-                    form = item.find_element(By.XPATH, ".//form[@data-product-sku]")
-                    sku = form.get_attribute("data-product-sku")
-                except:
-                    pass
-
-                productos_extraidos.append({
-                    'Grupo': grupo,
-                    'Fecha': datetime.now().strftime("%Y-%m-%d"),
-                    'EAN': sku,
-                    'Nombre': nombre,
-                    'Precio_Lista': precio_lista,
-                    'Precio_Final': precio_final,
-                    'Porcentaje_Oferta': porcentaje_oferta,
-                    'Link': link
-                })
-                
-            except Exception:
-                continue
-
-# --- FASE 2: BÚSQUEDA DIRIGIDA POR KILLERS ---
-print("\n--- FASE 2: ASEGURANDO COBERTURA DE KILLERS ---")
+# --- FASE 1: BÚSQUEDA DIRIGIDA POR KILLERS ---
+print("\n--- FASE 1: BÚSQUEDA DE KILLERS ---")
 if os.path.exists(ARCHIVO_KILLERS):
     try:
-        df_killers = pd.read_excel(ARCHIVO_KILLERS)
-        eans_ya_encontrados = {re.sub(r'\.0$', '', str(p.get('EAN', ''))).strip() for p in productos_extraidos}
+        df_killers = pd.read_excel(ARCHIVO_KILLERS, dtype={'EAN': str})
+        col_nombre = [c for c in df_killers.columns if 'Descripci' in c]
+        col_nombre = col_nombre[0] if col_nombre else 'Nombre'
         
         killers_a_buscar = []
-        for x in df_killers['EAN'].dropna():
-            s = str(x)
-            if 'e' in s.lower() or '.' in s:
-                try: s = format(float(s), '.0f')
+        for _, row in df_killers.iterrows():
+            ean_k = str(row.get('EAN', '')).strip()
+            if ean_k.lower() == 'nan': ean_k = ''
+            if 'e' in ean_k.lower() or '.' in ean_k:
+                try: ean_k = format(float(ean_k), '.0f')
                 except: pass
-            s = re.sub(r'\.0$', '', s).strip()
-            if s and s not in eans_ya_encontrados:
-                killers_a_buscar.append(s)
-        
-        print(f"Se identificaron {len(killers_a_buscar)} Killers faltantes.")
-        
-        for ean in killers_a_buscar:
-            print(f"  -> Buscando EAN Killer: {ean}...")
-            target_url = f"https://www.centraloeste.com.ar/catalogsearch/result/?q={ean}"
-            driver.get(target_url)
+            ean_k = re.sub(r'\.0$', '', ean_k).strip()
             
-            try:
-                # Esperar a ver si hay productos
-                xpath_items = "//ol[contains(@class, 'product-items')]//li[contains(@class, 'product-item')]"
-                WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, xpath_items)))
-                items = driver.find_elements(By.XPATH, xpath_items)
+            nombre_k = str(row.get(col_nombre, row.get('Nombre', ''))).strip()
+            if nombre_k.lower() == 'nan': nombre_k = ''
+            
+            if ean_k or (not ean_k and nombre_k):
+                nombre_limpio = re.sub(r'^\d+\s*-\s*', '', nombre_k).strip()
+                nombre_corto = " ".join(nombre_limpio.split()[:3]) # Primeras 3 palabras
                 
-                if items:
-                    item = items[0]
-                    elem_link = item.find_element(By.XPATH, ".//a[contains(@class, 'product-item-link')]")
-                    nombre = elem_link.text.strip()
-                    link = elem_link.get_attribute("href")
+                # Nombre seguro: quitamos palabras con caracteres corruptos () 
+                palabras_limpias = [p for p in nombre_limpio.split() if '' not in p]
+                nombre_seguro = " ".join(palabras_limpias[:3])
+                
+                killers_a_buscar.append({'ean': ean_k, 'nombre_raw': nombre_k, 'nombre_limpio': nombre_limpio, 'nombre_corto': nombre_corto, 'nombre_seguro': nombre_seguro})
+        
+        print(f"Se procesarán {len(killers_a_buscar)} Killers.")
+        
+        for k in killers_a_buscar:
+            ean = k['ean']
+            nombre_limpio = k['nombre_limpio']
+            nombre_corto = k['nombre_corto']
+            print(f"  -> Procesando: {k['nombre_raw'][:50]}...")
+            
+            urls_a_probar = []
+            
+            # --- NUEVO: PRIORIDAD SI YA EXISTE EN FALLBACK ---
+            key_fb = f"{ean}_{k['nombre_raw']}"
+            if key_fb in urls_prioridad:
+                url_directa = urls_prioridad[key_fb]
+                print(f"     [*] Usando URL de prioridad: {url_directa}")
+                urls_a_probar.append((url_directa, "URL Prioridad"))
+            else:
+                # Si no hay prioridad, armamos la lista de búsqueda normal
+                if ean: urls_a_probar.append((f"https://www.centraloeste.com.ar/catalogsearch/result/?q={ean}", "EAN"))
+                if nombre_limpio: urls_a_probar.append((f"https://www.centraloeste.com.ar/catalogsearch/result/?q={urllib.parse.quote(nombre_limpio)}", "Nombre Completo"))
+                if nombre_corto and nombre_corto != nombre_limpio: urls_a_probar.append((f"https://www.centraloeste.com.ar/catalogsearch/result/?q={urllib.parse.quote(nombre_corto)}", "Nombre Corto"))
+                if k.get('nombre_seguro') and k.get('nombre_seguro') != k.get('nombre_corto') and k.get('nombre_seguro') != '':
+                    urls_a_probar.append((f"https://www.centraloeste.com.ar/catalogsearch/result/?q={urllib.parse.quote(k['nombre_seguro'])}", "Nombre Seguro"))
+            
+            encontrado = False
+            for target_url, tipo_busqueda in urls_a_probar:
+                if encontrado: break
+                
+                try:
+                    res = session.get(target_url, timeout=15)
+                    if res.status_code != 200:
+                        continue
+                        
+                    soup = BeautifulSoup(res.text, 'html.parser')
                     
-                    precio_final = 0
-                    precio_lista = 0
-                    porcentaje_oferta = 0
+                    # Verificamos si estamos en una página de producto directo (redirección o URL directa)
+                    is_product_page = len(soup.select(".product-info-main")) > 0 and "catalogsearch/result" not in res.url
                     
-                    try:
-                        item.find_element(By.CSS_SELECTOR, ".stock.unavailable")
-                        precio_final = "Sin Stock"
-                        precio_lista = "Sin Stock"
-                    except:
+                    if is_product_page:
+                        # Extraer datos de la página del producto directo
                         try:
-                            price_box = item.find_element(By.XPATH, ".//div[contains(@class, 'price-box')]")
-                            try:
-                                txt_final = price_box.find_element(By.XPATH, ".//span[@data-price-type='finalPrice']//span[@class='price']").text
-                                precio_final = limpiar_precio(txt_final)
-                            except:
-                                try:
-                                    txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
-                                    precio_final = limpiar_precio(txt_final)
-                                except: pass
+                            nombre_elem = soup.find(itemprop='name')
+                            nombre = nombre_elem.text.strip() if nombre_elem else soup.select_one(".page-title span").text.strip()
+                        except:
+                            nombre = f"Producto Encontrado ({tipo_busqueda})"
+                            
+                        precio_final = 0
+                        precio_lista = 0
+                        porcentaje_oferta = 0
+                        stock = "Con Stock"
+                        
+                        if soup.select_one(".stock.unavailable"):
+                            precio_final = "Sin Stock"
+                            precio_lista = "Sin Stock"
+                            stock = "Sin Stock"
+                        else:
+                            price_box = soup.select_one(".product-info-main .price-box")
+                            if price_box:
+                                final_elem = price_box.select_one("[data-price-type='finalPrice'] .price")
+                                if final_elem:
+                                    precio_final = limpiar_precio(final_elem.text)
+                                else:
+                                    final_elem = price_box.select_one(".price")
+                                    if final_elem: precio_final = limpiar_precio(final_elem.text)
                                 
-                            try:
-                                txt_old = price_box.find_element(By.XPATH, ".//span[@data-price-type='oldPrice']//span[@class='price']").text
-                                precio_lista = limpiar_precio(txt_old)
-                            except:
-                                precio_lista = precio_final
-                        except: pass
+                                old_elem = price_box.select_one("[data-price-type='oldPrice'] .price")
+                                if old_elem:
+                                    precio_lista = limpiar_precio(old_elem.text)
+                                else:
+                                    precio_lista = precio_final
+                            
+                            if isinstance(precio_lista, int) and isinstance(precio_final, int) and precio_lista > 0 and precio_final < precio_lista:
+                                porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
                         
-                        if precio_lista > 0 and precio_final < precio_lista:
-                            porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
+                        sku = "N/A"
+                        sku_elem = soup.select_one(".product.attribute.sku .value")
+                        if sku_elem: sku = sku_elem.text.strip()
+                                
+                        # VALIDACIÓN ESTRICTA: Si buscamos por nombre, exigimos que el SKU coincida con nuestro EAN
+                        if tipo_busqueda != "EAN" and k['ean'] and k['ean'] != 'nan' and sku != "N/A" and sku != k['ean']:
+                            print(f"     [!] Descartado ({tipo_busqueda}): SKU de la web ({sku}) != EAN oficial ({k['ean']})")
+                            encontrado = False
+                            # No rompemos el loop for, dejamos que intente el próximo método de búsqueda
+                        else:
+                            productos_extraidos.append({
+                                'Grupo': 'Killers',
+                                'Farmacia': 'Central_Oeste',
+                                'Fecha': datetime.now().strftime("%Y-%m-%d"),
+                                'EAN': sku if sku != "N/A" else (ean if ean else 'N/A'),
+                                'Nombre': nombre,
+                                'Precio_Lista': precio_lista,
+                                'Precio_Final': precio_final,
+                                'Porcentaje_Oferta': porcentaje_oferta,
+                                'Stock': stock,
+                                'Link': res.url,
+                                'EAN_Original': k['ean'],
+                                'Nombre_Original': k['nombre_raw']
+                            })
+                            print(f"     [OK] Encontrado (Producto directo por {tipo_busqueda}): {nombre}")
+                            encontrado = True
+
+
+                    else:
+                        # Extraer datos de la lista de resultados
+                        items = soup.select("ol.product-items li.product-item")
                         
-                    sku = "N/A"
-                    try:
-                        form = item.find_element(By.XPATH, ".//form[@data-product-sku]")
-                        sku = form.get_attribute("data-product-sku")
-                    except: pass
+                        if items:
+                            item = items[0]
+                            link_elem = item.select_one("a.product-item-link")
+                            nombre = link_elem.text.strip() if link_elem else "Producto"
+                            link = link_elem['href'] if link_elem and 'href' in link_elem.attrs else target_url
+                            
+                            precio_final = 0
+                            precio_lista = 0
+                            porcentaje_oferta = 0
+                            stock = "Con Stock"
+                            
+                            if item.select_one(".stock.unavailable"):
+                                precio_final = "Sin Stock"
+                                precio_lista = "Sin Stock"
+                                stock = "Sin Stock"
+                            else:
+                                price_box = item.select_one(".price-box")
+                                if price_box:
+                                    final_elem = price_box.select_one("[data-price-type='finalPrice'] .price")
+                                    if final_elem:
+                                        precio_final = limpiar_precio(final_elem.text)
+                                    else:
+                                        final_elem = price_box.select_one(".price")
+                                        if final_elem: precio_final = limpiar_precio(final_elem.text)
+                                        
+                                    old_elem = price_box.select_one("[data-price-type='oldPrice'] .price")
+                                    if old_elem:
+                                        precio_lista = limpiar_precio(old_elem.text)
+                                    else:
+                                        precio_lista = precio_final
+                                    
+                                if isinstance(precio_lista, int) and isinstance(precio_final, int) and precio_lista > 0 and precio_final < precio_lista:
+                                    porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
+                                
+                            sku = "N/A"
+                            form_elem = item.select_one("form[data-product-sku]")
+                            if form_elem and 'data-product-sku' in form_elem.attrs:
+                                sku = form_elem['data-product-sku']
+                            
+                            # VALIDACIÓN ESTRICTA: Si buscamos por nombre, exigimos que el SKU coincida con nuestro EAN
+                            if tipo_busqueda != "EAN" and k['ean'] and k['ean'] != 'nan' and sku != "N/A" and sku != k['ean']:
+                                print(f"     [!] Descartado ({tipo_busqueda}): SKU de la web ({sku}) != EAN oficial ({k['ean']})")
+                                encontrado = False
+                            else:
+                                productos_extraidos.append({
+                                    'Grupo': 'Killers',
+                                    'Farmacia': 'Central_Oeste',
+                                    'Fecha': datetime.now().strftime("%Y-%m-%d"),
+                                    'EAN': sku if sku != "N/A" else (ean if ean else 'N/A'),
+                                    'Nombre': nombre,
+                                    'Precio_Lista': precio_lista,
+                                    'Precio_Final': precio_final,
+                                    'Porcentaje_Oferta': porcentaje_oferta,
+                                    'Stock': stock,
+                                    'Link': link,
+                                    'EAN_Original': k['ean'],
+                                    'Nombre_Original': k['nombre_raw']
+                                })
+                                print(f"     [OK] Encontrado ({tipo_busqueda}): {nombre}")
+                                encontrado = True
+                except Exception as e:
+                    print(f"     [!] Error procesando {tipo_busqueda}: {e}")
+                    pass
                     
-                    productos_extraidos.append({
-                        'Grupo': 'Killers-Targeted',
-                        'Fecha': datetime.now().strftime("%Y-%m-%d"),
-                        'EAN': sku if sku != "N/A" else ean,
-                        'Nombre': nombre,
-                        'Precio_Lista': precio_lista,
-                        'Precio_Final': precio_final,
-                        'Porcentaje_Oferta': porcentaje_oferta,
-                        'Link': link
-                    })
-                    print(f"     [OK] Encontrado: {nombre}")
-                else:
-                    print(f"     [!] No encontrado.")
-            except TimeoutException:
-                print(f"     [!] No encontrado o sin stock.")
-            except Exception as e:
-                print(f"     [!] Error procesando EAN: {e}")
+            if not encontrado:
+                print(f"     [!] No encontrado o sin stock en ningún intento.")
                 
     except Exception as e:
-        print(f"Error en Fase 2: {e}")
+        print(f"Error en Fase 1: {e}")
 else:
-    print("Archivo de Killers no encontrado. Saltando Fase 2.")
+    print(f"Archivo de Killers no encontrado: {ARCHIVO_KILLERS}")
 
-# --- FASE 3: URLs DE FALLBACK MANUAL ---
-print("\n--- FASE 3: PROCESANDO URLs DE FALLBACK MANUAL ---")
-ARCHIVO_FALLBACK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "killers_urls_fallback.xlsx")
+# --- FASE 2: URLs DE FALLBACK MANUAL ---
+print("\n--- FASE 2: PROCESANDO URLs DE FALLBACK MANUAL ---")
+eans_ya_encontrados = {re.sub(r'\.0$', '', str(p.get('EAN', ''))).strip() for p in productos_extraidos}
+
 if os.path.exists(ARCHIVO_FALLBACK):
     try:
         df_fb = pd.read_excel(ARCHIVO_FALLBACK)
@@ -254,84 +274,83 @@ if os.path.exists(ARCHIVO_FALLBACK):
             
             for _, row in df_fb.iterrows():
                 ean = str(row.get('EAN', '')).strip()
+                if ean in eans_ya_encontrados: continue
+                
                 url_fb = str(row.get('URL', '')).strip()
                 if not url_fb or url_fb == 'nan': continue
                 
-                print(f"  -> Procesando URL Fallback para EAN {ean}: {url_fb}")
-                driver.get(url_fb)
+                print(f"  -> Procesando URL Fallback EAN {ean}: {url_fb}")
                 
                 try:
-                    # Intentar extraer datos de la PDP
+                    res = session.get(url_fb, timeout=15)
+                    if res.status_code != 200:
+                        print("     [!] URL retornó error HTTP", res.status_code)
+                        continue
+                        
+                    soup = BeautifulSoup(res.text, 'html.parser')
+                    
                     try:
-                        nombre = driver.find_element(By.XPATH, "//span[@itemprop='name']").text.strip()
+                        nombre_elem = soup.find(itemprop='name')
+                        nombre = nombre_elem.text.strip() if nombre_elem else soup.select_one(".page-title span").text.strip()
                     except:
-                        try:
-                            nombre = driver.find_element(By.CSS_SELECTOR, ".page-title span").text.strip()
-                        except:
-                            nombre = f"Producto Fallback {ean}"
+                        nombre = f"Producto Fallback {ean}"
                             
                     precio_final = 0
                     precio_lista = 0
                     porcentaje_oferta = 0
+                    stock = "Con Stock"
                     
-                    try:
-                        driver.find_element(By.CSS_SELECTOR, ".stock.unavailable")
+                    if soup.select_one(".stock.unavailable"):
                         precio_final = "Sin Stock"
                         precio_lista = "Sin Stock"
-                    except:
-                        try:
-                            price_box = driver.find_element(By.CSS_SELECTOR, ".product-info-main .price-box")
-                            try:
-                                txt_final = price_box.find_element(By.CSS_SELECTOR, "[data-price-type='finalPrice'] .price").text
-                                precio_final = limpiar_precio(txt_final)
-                            except:
-                                try:
-                                    txt_final = price_box.find_element(By.CSS_SELECTOR, ".price").text
-                                    precio_final = limpiar_precio(txt_final)
-                                except: pass
-                                
-                            try:
-                                txt_old = price_box.find_element(By.CSS_SELECTOR, "[data-price-type='oldPrice'] .price").text
-                                precio_lista = limpiar_precio(txt_old)
-                            except:
+                        stock = "Sin Stock"
+                    else:
+                        price_box = soup.select_one(".product-info-main .price-box")
+                        if price_box:
+                            final_elem = price_box.select_one("[data-price-type='finalPrice'] .price")
+                            if final_elem:
+                                precio_final = limpiar_precio(final_elem.text)
+                            else:
+                                final_elem = price_box.select_one(".price")
+                                if final_elem: precio_final = limpiar_precio(final_elem.text)
+                            
+                            old_elem = price_box.select_one("[data-price-type='oldPrice'] .price")
+                            if old_elem:
+                                precio_lista = limpiar_precio(old_elem.text)
+                            else:
                                 precio_lista = precio_final
-                        except: pass
                         
-                        if precio_lista > 0 and precio_final < precio_lista:
+                        if isinstance(precio_lista, int) and isinstance(precio_final, int) and precio_lista > 0 and precio_final < precio_lista:
                             porcentaje_oferta = round(((precio_lista - precio_final) / precio_lista) * 100, 2)
                         
                     productos_extraidos.append({
-                        'Grupo': 'Killers-Fallback',
+                        'Grupo': 'Killers',
+                        'Farmacia': 'Central_Oeste',
                         'Fecha': datetime.now().strftime("%Y-%m-%d"),
                         'EAN': ean,
                         'Nombre': nombre,
                         'Precio_Lista': precio_lista,
                         'Precio_Final': precio_final,
                         'Porcentaje_Oferta': porcentaje_oferta,
-                        'Link': url_fb
+                        'Stock': stock,
+                        'Link': url_fb,
+                        'EAN_Original': ean,
+                        'Nombre_Original': str(row.get('Nombre', f"Producto Fallback {ean}"))
                     })
                     print(f"     [OK] Encontrado vía Fallback: {nombre}")
                 except Exception as e:
                     print(f"     [!] Error procesando URL Fallback: {e}")
-        else:
-            print("Archivo de Fallback vacío o sin columnas requeridas.")
     except Exception as e:
-        print(f"Error en Fase 3: {e}")
-else:
-    print("Archivo de Fallback no encontrado. Saltando Fase 3.")
+        print(f"Error en Fase 2: {e}")
 
-driver.quit()
-
-# --- 5. GUARDAR ---
+# --- GUARDAR ---
 if productos_extraidos:
     df_out = pd.DataFrame(productos_extraidos)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Resultados_scraping", f"Output_CentralOeste_Magento_{ts}.xlsx")
-
-    # Intentar crear carpeta si no existe
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    
+    df_out = df_out.drop_duplicates(subset=['EAN', 'Nombre'])
     df_out.to_excel(path, index=False)
-    print(f"\n¡Éxito! Archivo guardado: {path}")
+    print(f"\n¡Éxito! Guardados {len(df_out)} productos en: {path}")
 else:
-    print("\nNo se extrajo nada. Verifica los selectores o la conexión.")
+    print("\nNo se extrajeron datos.")

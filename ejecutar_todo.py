@@ -34,12 +34,21 @@ def run_script(script_name):
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     
-    print("INICIANDO PIPELINE DE COTIZACION DE FARMACIAS")
+    print("INICIANDO PIPELINE DE COTIZACION DE FARMACIAS (MODO KILLERS DIRECTO)")
     start_time = time.time()
+    
+    # NUEVO: Intentar cosechar links de ejecuciones previas para ganar velocidad
+    run_script("cosechar_links.py")
     
     run_script("scraping_central_oeste.py")
     run_script("scraping_farmacity.py")
     run_script("scraping_farmaonline.py")
+    
+    print("\n--------------------------------------------------")
+    print("ANALIZANDO FALTANTES...")
+    run_script("generar_faltantes.py")
+    print("--------------------------------------------------")
+    
     exito_consolidador = run_script("consolidar_datos.py")
     
     end_time = time.time()
@@ -47,5 +56,5 @@ if __name__ == "__main__":
     
     if exito_consolidador:
         print("\n¡Los datos estan listos!")
+        print("-> Revisa 'killers_urls_fallback.xlsx' si hubo productos no encontrados.")
         print("-> Para ver los resultados en el navegador, ejecuta el archivo: ver_dashboard.py")
-        print("   Puedes hacerlo haciendo doble clic en él o corriendo: python ver_dashboard.py")
