@@ -52,8 +52,22 @@ function App() {
     return s;
   }, [productos]);
 
+  const esNumeroValido = (val) => {
+    if (typeof val === 'number') return !isNaN(val);
+    if (typeof val === 'string') {
+      return !isNaN(parseFloat(val.replace(/[^0-9.-]/g, '')));
+    }
+    return false;
+  };
+
   const formatearPrecio = (num) => {
     if (!num || num === Infinity) return "-";
+    if (typeof num === 'string') {
+      const parsed = parseFloat(num.replace(/[^0-9.-]/g, ''));
+      if (isNaN(parsed)) return num;
+      return new Intl.NumberFormat('es-AR').format(parsed);
+    }
+    if (isNaN(num)) return "-";
     return new Intl.NumberFormat('es-AR').format(num);
   }
 
@@ -68,16 +82,22 @@ function App() {
       </div>
     );
 
+    const esFinalNum = esNumeroValido(pData.Precio_Final);
+    const esListaNum = esNumeroValido(pData.Precio_Lista);
+
+    const precioLista = typeof pData.Precio_Lista === 'number' ? pData.Precio_Lista : parseFloat(String(pData.Precio_Lista).replace(/[^0-9.-]/g, ''));
+    const precioFinal = typeof pData.Precio_Final === 'number' ? pData.Precio_Final : parseFloat(String(pData.Precio_Final).replace(/[^0-9.-]/g, ''));
+
     return (
       <a href={pData.Link} target="_blank" rel="noreferrer" key={farmKey}
          className={`pharmacy-price ${isWinner ? 'winner' : ''}`}>
         <span className="pharmacy-name">{farmLabel}</span>
         <div className="price-details">
-          <span className={`actual-price currency ${isWinner ? 'winner-text' : ''}`}>
+          <span className={`actual-price ${esFinalNum ? 'currency' : ''} ${isWinner ? 'winner-text' : ''}`}>
             {formatearPrecio(pData.Precio_Final)}
-            {pData.Descuento > 0 && <span className="discount-badge">-{pData.Descuento}%</span>}
+            {esFinalNum && pData.Descuento > 0 && <span className="discount-badge">-{pData.Descuento}%</span>}
           </span>
-          {pData.Precio_Lista > pData.Precio_Final && (
+          {esListaNum && esFinalNum && precioLista > precioFinal && (
             <span className="list-price currency">{formatearPrecio(pData.Precio_Lista)}</span>
           )}
         </div>

@@ -5,7 +5,7 @@ import re
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CARPETA_RESULTADOS = os.path.join(BASE_DIR, "Resultados_scraping")
-RUTA_KILLERS = r"C:\Users\b_saravia\OneDrive - Farmacity\Documents\skillers\Killers evento.xlsx"
+RUTA_KILLERS = os.path.join(BASE_DIR, "Killers evento.xlsx")
 OUTPUT_FALLBACK = os.path.join(BASE_DIR, "killers_urls_fallback.xlsx")
 
 FARMACIAS = [

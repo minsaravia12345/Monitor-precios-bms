@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import urllib.parse
 
 # --- CONFIGURACIÓN ---
-ARCHIVO_KILLERS = r"C:\Users\b_saravia\OneDrive - Farmacity\Documents\skillers\Killers evento.xlsx"
+ARCHIVO_KILLERS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Killers evento.xlsx")
 ARCHIVO_FALLBACK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "killers_urls_fallback.xlsx")
 
 # Cargar URLs de fallback para usarlas como prioridad
