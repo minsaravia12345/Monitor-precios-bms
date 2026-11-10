@@ -125,6 +125,34 @@ export function IconGithub(props) {
   );
 }
 
+export function IconInfo(props) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5.5" />
+      <circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function IconFlag(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 21V4" />
+      <path d="M5 5h12l-3 4 3 4H5" />
+    </svg>
+  );
+}
+
+export function IconArrowRight(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 12h14" />
+      <path d="M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export function IconFilter(props) {
   return (
     <svg {...base} {...props}>

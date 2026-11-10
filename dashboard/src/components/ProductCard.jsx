@@ -1,5 +1,5 @@
 import { esNumeroValido, parseNumero, formatearPrecio } from '../utils/format';
-import { tierMOS } from '../utils/metrics';
+import { tierMOS, formatPriceIndexRatio } from '../utils/metrics';
 
 const FARMACITY_KEY = 'Farmacity';
 
@@ -77,6 +77,8 @@ export default function ProductCard({ producto, farmacias, delay }) {
   const esEmpate = producto.Ganador === 'Empate';
   const { priceIndex, promoPressure, mos } = producto.metricas;
   const mTier = tierMOS(mos);
+  const { ratio } = formatPriceIndexRatio(priceIndex);
+  const diagnostico = producto.diagnostico;
 
   return (
     <div
@@ -93,9 +95,9 @@ export default function ProductCard({ producto, farmacias, delay }) {
       <h3 className="product-name">{producto.Nombre}</h3>
 
       <div className="metric-chips">
-        <span className="metric-chip" title="Price Index: precio de Farmacity vs. promedio competidor (100 = paridad)">
+        <span className="metric-chip" title="Price Index: precio de Farmacity vs. promedio competidor (1.00 = paridad)">
           <span className="metric-chip-label">Price Index</span>
-          <span className="metric-chip-value">{priceIndex === null ? '—' : priceIndex}</span>
+          <span className="metric-chip-value">{priceIndex === null ? '—' : ratio}</span>
         </span>
         <span className="metric-chip" title="Promo Pressure: intensidad promocional de la competencia (0-100)">
           <span className="metric-chip-label">Promo</span>
@@ -106,6 +108,10 @@ export default function ProductCard({ producto, farmacias, delay }) {
           <span className="metric-chip-value">{mos}</span>
         </span>
       </div>
+
+      <p className={`insight-line tone-${diagnostico.tone}`}>
+        <span className="insight-dot" /> {diagnostico.texto}
+      </p>
 
       <div className="prices-container">
         {farmacias.map((f) => (
@@ -122,8 +128,8 @@ export default function ProductCard({ producto, farmacias, delay }) {
         )}
       </div>
 
-      <p className={`accion-sugerida tone-${mTier.tone}`}>
-        <span className="accion-dot" /> {mTier.accion}
+      <p className={`insight-line tone-${mTier.tone}`}>
+        <span className="insight-dot" /> {mTier.accion}
       </p>
     </div>
   );

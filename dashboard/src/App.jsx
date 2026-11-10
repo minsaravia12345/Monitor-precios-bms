@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
+import BriefingPanel from './components/BriefingPanel';
 import IntelligenceSummary from './components/IntelligenceSummary';
 import StatsOverview from './components/StatsOverview';
 import Toolbar from './components/Toolbar';
@@ -10,8 +11,10 @@ import Skeleton from './components/Skeleton';
 import Footer from './components/Footer';
 import { useTheme } from './hooks/useTheme';
 import { normalizarTexto, parseNumero } from './utils/format';
-import { calcularMetricas } from './utils/metrics';
+import { calcularMetricas, diagnosticoCombinado } from './utils/metrics';
 import './index.css';
+
+const UMBRAL_OPORTUNIDAD = 60;
 
 const FARMACIAS = [
   { key: 'Farmacity', label: 'Farmacity', color: '#f472b6' },
@@ -68,7 +71,12 @@ function App() {
   );
 
   const productosConMetricas = useMemo(
-    () => productos.map((p) => ({ ...p, metricas: calcularMetricas(p, farmaciasVisibles.length || 1) })),
+    () =>
+      productos.map((p) => {
+        const metricas = calcularMetricas(p, farmaciasVisibles.length || 1);
+        const diagnostico = diagnosticoCombinado(metricas.priceIndex, metricas.promoPressure);
+        return { ...p, metricas, diagnostico };
+      }),
     [productos, farmaciasVisibles]
   );
 
@@ -78,7 +86,7 @@ function App() {
     const term = normalizarTexto(search.trim());
 
     const filtrados = productosConMetricas.filter((p) => {
-      const matchTab = tabActivo === 'killers' ? p.metricas.mos >= 65 : true;
+      const matchTab = tabActivo === 'killers' ? p.metricas.mos >= UMBRAL_OPORTUNIDAD : true;
       const matchGrupo = filtroGrupo === 'Todos' || String(p.Grupo) === String(filtroGrupo);
       const matchGanador =
         filtroGanador === 'Todos' || (p.Ganador && String(p.Ganador).includes(filtroGanador));
@@ -141,8 +149,16 @@ function App() {
     const mos = Math.round(
       productosConMetricas.reduce((sum, p) => sum + p.metricas.mos, 0) / productosConMetricas.length
     );
-    const oportunidadesCriticas = productosConMetricas.filter((p) => p.metricas.mos >= 65).length;
+    const oportunidadesCriticas = productosConMetricas.filter((p) => p.metricas.mos >= 80).length;
     return { priceIndex, promoPressure, visibilityIndex, mos, oportunidadesCriticas };
+  }, [productosConMetricas]);
+
+  const briefing = useMemo(() => {
+    const empujarFuerte = productosConMetricas.filter((p) => p.metricas.mos >= 80).length;
+    const empujarSelectivo = productosConMetricas.filter((p) => p.metricas.mos >= 60 && p.metricas.mos < 80).length;
+    const riesgoPerdida = productosConMetricas.filter((p) => p.diagnostico.tone === 'critical').length;
+    const topOportunidades = [...productosConMetricas].sort((a, b) => b.metricas.mos - a.metricas.mos).slice(0, 5);
+    return { counts: { empujarFuerte, empujarSelectivo, riesgoPerdida }, topOportunidades };
   }, [productosConMetricas]);
 
   const limpiarFiltros = () => {
@@ -158,6 +174,16 @@ function App() {
   const handlePageChange = (p) => {
     setPage(p);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSeleccionarProducto = (producto) => {
+    setTabActivo('explorar');
+    setFiltroGrupo('Todos');
+    setFiltroGanador('Todos');
+    setSearch(producto.EAN && producto.EAN !== 'N/A' ? producto.EAN : producto.Nombre);
+    setTimeout(() => {
+      document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   return (
@@ -179,6 +205,12 @@ function App() {
           <Skeleton count={8} />
         ) : (
           <>
+            <BriefingPanel
+              counts={briefing.counts}
+              topOportunidades={briefing.topOportunidades}
+              onSeleccionarProducto={handleSeleccionarProducto}
+            />
+
             <h3 className="section-label">Indicadores de inteligencia competitiva</h3>
             <IntelligenceSummary
               priceIndex={intel.priceIndex}
@@ -206,11 +238,11 @@ function App() {
               setSortBy={setSortBy}
             />
 
-            <div className="results-meta">
+            <div id="catalogo" className="results-meta">
               <span>
                 <strong>{productosFiltrados.length}</strong> resultado
                 {productosFiltrados.length !== 1 ? 's' : ''}
-                {tabActivo === 'killers' && ' con Market Opportunity Score ≥ 65'}
+                {tabActivo === 'killers' && ` con Market Opportunity Score ≥ ${UMBRAL_OPORTUNIDAD}`}
               </span>
               {hayFiltrosActivos && (
                 <button type="button" className="clear-filters-btn" onClick={limpiarFiltros}>
