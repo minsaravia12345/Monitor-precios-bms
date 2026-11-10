@@ -39,7 +39,7 @@ export default function Toolbar({
           Oportunidades
         </button>
         <span id="oportunidades-hint" className="visually-hidden">
-          Productos con Market Opportunity Score (MOS) mayor o igual a 60 — empuje selectivo o fuerte
+          Productos con Market Opportunity Score (MOS) mayor o igual a 65
         </span>
       </div>
 

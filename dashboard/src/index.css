@@ -39,9 +39,6 @@
   --tone-neutral: #fbbf24;
   --tone-neutral-bg: rgba(251, 191, 36, 0.14);
   --tone-neutral-border: rgba(251, 191, 36, 0.3);
-  --tone-elevated: #fb923c;
-  --tone-elevated-bg: rgba(251, 146, 60, 0.14);
-  --tone-elevated-border: rgba(251, 146, 60, 0.32);
   --tone-critical: var(--danger);
   --tone-critical-bg: var(--danger-bg);
   --tone-critical-border: rgba(248, 113, 113, 0.32);
@@ -96,9 +93,6 @@
   --tone-neutral: #b45309;
   --tone-neutral-bg: rgba(180, 83, 9, 0.1);
   --tone-neutral-border: rgba(180, 83, 9, 0.22);
-  --tone-elevated: #c2410c;
-  --tone-elevated-bg: rgba(194, 65, 12, 0.1);
-  --tone-elevated-border: rgba(194, 65, 12, 0.24);
   --tone-critical: var(--danger);
   --tone-critical-bg: var(--danger-bg);
   --tone-critical-border: rgba(220, 38, 38, 0.22);
@@ -333,19 +327,8 @@ a:focus-visible {
   border-top-color: var(--tone-neutral-border);
 }
 
-.intel-card.tone-elevated {
-  border-top-color: var(--tone-elevated-border);
-}
-
 .intel-card.tone-critical {
   border-top-color: var(--tone-critical-border);
-}
-
-.info-icon {
-  cursor: help;
-  color: var(--text-tertiary);
-  vertical-align: -2px;
-  margin-left: 2px;
 }
 
 .intel-card-highlight {
@@ -403,10 +386,6 @@ a:focus-visible {
   background: var(--tone-neutral);
 }
 
-.gauge-track.tone-elevated .gauge-fill {
-  background: var(--tone-elevated);
-}
-
 .gauge-track.tone-critical .gauge-fill {
   background: var(--tone-critical);
 }
@@ -419,142 +398,6 @@ a:focus-visible {
 
 .intel-caption strong {
   color: var(--text-primary);
-}
-
-/* ============ Briefing panel ("lunes con criterio") ============ */
-.briefing-panel {
-  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), var(--surface));
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.4rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.briefing-head {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.briefing-icon {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
-  color: var(--accent);
-}
-
-.briefing-head h3 {
-  margin: 0 0 0.3rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.briefing-head p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.briefing-head p strong {
-  color: var(--text-primary);
-}
-
-.briefing-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.briefing-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: var(--surface-solid);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 0.8rem;
-}
-
-.briefing-rank {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--text-primary) 8%, transparent);
-  color: var(--text-secondary);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.briefing-info {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.briefing-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.briefing-diag {
-  font-size: 0.76rem;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.briefing-mos {
-  flex-shrink: 0;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: var(--radius-pill);
-  background: var(--tone-critical-bg);
-  color: var(--tone-critical);
-  white-space: nowrap;
-}
-
-.briefing-mos.tone-elevated {
-  background: var(--tone-elevated-bg);
-  color: var(--tone-elevated);
-}
-
-.briefing-cta {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  background: none;
-  border: 1px solid var(--border-strong);
-  color: var(--text-primary);
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 0.3rem 0.65rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
-
-.briefing-cta:hover {
-  background: var(--surface-hover);
 }
 
 /* ============ Stats grid ============ */
@@ -809,10 +652,6 @@ a:focus-visible {
   border-left: 3px solid var(--tone-critical);
 }
 
-.product-card.tone-elevated {
-  border-left: 3px solid var(--tone-elevated);
-}
-
 .product-card.tone-neutral {
   border-left: 3px solid var(--tone-neutral);
 }
@@ -860,11 +699,6 @@ a:focus-visible {
   border-color: var(--tone-neutral-border);
 }
 
-.metric-chip-mos.tone-elevated {
-  background: var(--tone-elevated-bg);
-  border-color: var(--tone-elevated-border);
-}
-
 .metric-chip-mos.tone-good {
   background: var(--tone-good-bg);
   border-color: var(--tone-good-border);
@@ -874,7 +708,7 @@ a:focus-visible {
   color: inherit;
 }
 
-.insight-line {
+.accion-sugerida {
   margin: 0.75rem 0 0;
   font-size: 0.78rem;
   font-weight: 600;
@@ -884,19 +718,15 @@ a:focus-visible {
   color: var(--tone-critical);
 }
 
-.insight-line.tone-elevated {
-  color: var(--tone-elevated);
-}
-
-.insight-line.tone-neutral {
+.accion-sugerida.tone-neutral {
   color: var(--tone-neutral);
 }
 
-.insight-line.tone-good {
+.accion-sugerida.tone-good {
   color: var(--tone-good);
 }
 
-.insight-dot {
+.accion-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -1292,24 +1122,6 @@ a:focus-visible {
 
   .internal-pill {
     display: none;
-  }
-
-  .briefing-item {
-    flex-wrap: wrap;
-  }
-
-  .briefing-info {
-    flex-basis: 100%;
-    order: 1;
-  }
-
-  .briefing-mos {
-    order: 2;
-  }
-
-  .briefing-cta {
-    order: 3;
-    margin-left: auto;
   }
 
   .toolbar {
