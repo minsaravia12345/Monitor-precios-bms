@@ -7,9 +7,26 @@ export default function AdvancedFilters({
   setFiltroDescuento,
   soloPerdiendo,
   setSoloPerdiendo,
+  filtroPrecioRango,
+  setFiltroPrecioRango,
 }) {
   return (
     <div className="advanced-filters" role="group" aria-label="Filtros avanzados para el equipo comercial">
+      <div className="advanced-filter-field">
+        <label htmlFor="filtro-precio">Rango de precio</label>
+        <select
+          id="filtro-precio"
+          className="select-field"
+          value={filtroPrecioRango}
+          onChange={(e) => setFiltroPrecioRango(e.target.value)}
+        >
+          <option value="Todos">Cualquier precio</option>
+          <option value="bajo">Menos de $15.000</option>
+          <option value="medio">$15.000 a $50.000</option>
+          <option value="alto">Más de $50.000</option>
+        </select>
+      </div>
+
       <div className="advanced-filter-field">
         <label htmlFor="filtro-stock">Stock en Farmacity</label>
         <select

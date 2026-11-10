@@ -43,8 +43,9 @@ function App() {
   const [filtroBrechaMin, setFiltroBrechaMin] = useState(0);
   const [filtroDescuento, setFiltroDescuento] = useState('Todos');
   const [soloPerdiendo, setSoloPerdiendo] = useState(false);
+  const [filtroPrecioRango, setFiltroPrecioRango] = useState('Todos');
 
-  const filterKey = `${tabActivo}|${search}|${filtroGrupo}|${filtroGanador}|${sortBy}|${filtroStock}|${filtroBrechaMin}|${filtroDescuento}|${soloPerdiendo}`;
+  const filterKey = `${tabActivo}|${search}|${filtroGrupo}|${filtroGanador}|${sortBy}|${filtroStock}|${filtroBrechaMin}|${filtroDescuento}|${soloPerdiendo}|${filtroPrecioRango}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (filterKey !== lastFilterKey) {
     setLastFilterKey(filterKey);
@@ -112,8 +113,24 @@ function App() {
         !soloPerdiendo ||
         (!!datosFarmacity && !(p.Ganador && String(p.Ganador).includes('Farmacity')));
 
+      const mejorPrecio = parseNumero(p.MejorPrecio);
+      const matchPrecio =
+        filtroPrecioRango === 'Todos' ||
+        (mejorPrecio !== null &&
+          ((filtroPrecioRango === 'bajo' && mejorPrecio < 15000) ||
+            (filtroPrecioRango === 'medio' && mejorPrecio >= 15000 && mejorPrecio <= 50000) ||
+            (filtroPrecioRango === 'alto' && mejorPrecio > 50000)));
+
       return (
-        matchTab && matchGrupo && matchGanador && matchSearch && matchStock && matchDescuento && matchBrecha && matchPerdiendo
+        matchTab &&
+        matchGrupo &&
+        matchGanador &&
+        matchSearch &&
+        matchStock &&
+        matchDescuento &&
+        matchBrecha &&
+        matchPerdiendo &&
+        matchPrecio
       );
     });
 
@@ -144,6 +161,7 @@ function App() {
     filtroBrechaMin,
     filtroDescuento,
     soloPerdiendo,
+    filtroPrecioRango,
   ]);
 
   const totalPages = Math.max(1, Math.ceil(productosFiltrados.length / PAGE_SIZE));
@@ -193,13 +211,15 @@ function App() {
     setFiltroBrechaMin(0);
     setFiltroDescuento('Todos');
     setSoloPerdiendo(false);
+    setFiltroPrecioRango('Todos');
   };
 
   const advancedCount =
     (filtroStock !== 'Todos' ? 1 : 0) +
     (filtroBrechaMin > 0 ? 1 : 0) +
     (filtroDescuento !== 'Todos' ? 1 : 0) +
-    (soloPerdiendo ? 1 : 0);
+    (soloPerdiendo ? 1 : 0) +
+    (filtroPrecioRango !== 'Todos' ? 1 : 0);
 
   const hayFiltrosActivos =
     Boolean(search) ||
@@ -271,6 +291,8 @@ function App() {
                   setFiltroBrechaMin={setFiltroBrechaMin}
                   filtroDescuento={filtroDescuento}
                   setFiltroDescuento={setFiltroDescuento}
+                  filtroPrecioRango={filtroPrecioRango}
+                  setFiltroPrecioRango={setFiltroPrecioRango}
                   soloPerdiendo={soloPerdiendo}
                   setSoloPerdiendo={setSoloPerdiendo}
                 />
