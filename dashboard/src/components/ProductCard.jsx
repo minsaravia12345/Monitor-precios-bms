@@ -1,15 +1,20 @@
 import { esNumeroValido, parseNumero, formatearPrecio } from '../utils/format';
+import { tierMOS } from '../utils/metrics';
+
+const FARMACITY_KEY = 'Farmacity';
 
 function PharmacyRow({ prod, farmacia }) {
   const pData = prod.Precios?.[farmacia.key];
   const isWinner = prod.Ganador && prod.Ganador.includes(farmacia.label);
+  const esFarmacity = farmacia.key === FARMACITY_KEY;
 
   if (!pData) {
     return (
-      <div className="pharmacy-price unavailable">
+      <div className={`pharmacy-price unavailable ${esFarmacity ? 'is-self' : ''}`}>
         <span className="pharmacy-name">
           <span className="store-dot" style={{ background: farmacia.color }} />
           {farmacia.label}
+          {esFarmacity && <span className="self-tag">Vos</span>}
         </span>
         <span className="no-avail">No disponible</span>
       </div>
@@ -20,10 +25,11 @@ function PharmacyRow({ prod, farmacia }) {
 
   if (sinStock) {
     return (
-      <div className="pharmacy-price unavailable">
+      <div className={`pharmacy-price unavailable ${esFarmacity ? 'is-self' : ''}`}>
         <span className="pharmacy-name">
           <span className="store-dot" style={{ background: farmacia.color }} />
           {farmacia.label}
+          {esFarmacity && <span className="self-tag">Vos</span>}
         </span>
         <span className="no-avail">Sin stock</span>
       </div>
@@ -41,11 +47,12 @@ function PharmacyRow({ prod, farmacia }) {
       href={pData.Link}
       target="_blank"
       rel="noreferrer"
-      className={`pharmacy-price ${isWinner ? 'winner' : ''}`}
+      className={`pharmacy-price ${isWinner ? 'winner' : ''} ${esFarmacity ? 'is-self' : ''}`}
     >
       <span className="pharmacy-name">
         <span className="store-dot" style={{ background: farmacia.color }} />
         {farmacia.label}
+        {esFarmacity && <span className="self-tag">Vos</span>}
       </span>
       <div className="price-details">
         <span className={`actual-price ${esFinalNum ? 'currency' : ''} ${isWinner ? 'winner-text' : ''}`}>
@@ -60,12 +67,20 @@ function PharmacyRow({ prod, farmacia }) {
   );
 }
 
+function etiquetaGanador(ganador) {
+  if (ganador === 'Empate') return 'Empate de mercado';
+  if (!ganador || ganador === 'Sin precio') return 'Sin precio en el mercado';
+  return `Gana ${ganador}`;
+}
+
 export default function ProductCard({ producto, farmacias, delay }) {
   const esEmpate = producto.Ganador === 'Empate';
+  const { priceIndex, promoPressure, mos } = producto.metricas;
+  const mTier = tierMOS(mos);
 
   return (
     <div
-      className={`product-card ${producto.Es_Killer ? 'killer-style' : ''}`}
+      className={`product-card tone-${mTier.tone}`}
       style={{ animationDelay: `${delay}s` }}
     >
       <div className="card-head">
@@ -77,6 +92,21 @@ export default function ProductCard({ producto, farmacias, delay }) {
 
       <h3 className="product-name">{producto.Nombre}</h3>
 
+      <div className="metric-chips">
+        <span className="metric-chip" title="Price Index: precio de Farmacity vs. promedio competidor (100 = paridad)">
+          <span className="metric-chip-label">Price Index</span>
+          <span className="metric-chip-value">{priceIndex === null ? '—' : priceIndex}</span>
+        </span>
+        <span className="metric-chip" title="Promo Pressure: intensidad promocional de la competencia (0-100)">
+          <span className="metric-chip-label">Promo</span>
+          <span className="metric-chip-value">{promoPressure}</span>
+        </span>
+        <span className={`metric-chip metric-chip-mos tone-${mTier.tone}`} title="Market Opportunity Score (0-100)">
+          <span className="metric-chip-label">MOS</span>
+          <span className="metric-chip-value">{mos}</span>
+        </span>
+      </div>
+
       <div className="prices-container">
         {farmacias.map((f) => (
           <PharmacyRow prod={producto} farmacia={f} key={f.key} />
@@ -84,13 +114,17 @@ export default function ProductCard({ producto, farmacias, delay }) {
       </div>
 
       <div className="card-footer">
-        <span className={`winner-badge ${esEmpate ? 'empate' : ''}`}>
-          {esEmpate ? 'Empate' : `Gana ${producto.Ganador}`}
+        <span className={`winner-badge ${esEmpate || !producto.Ganador || producto.Ganador === 'Sin precio' ? 'empate' : ''}`}>
+          {etiquetaGanador(producto.Ganador)}
         </span>
         {producto.Diferencia_Porcentual > 0 && (
-          <span className="difference">Ahorro máx. {producto.Diferencia_Porcentual}%</span>
+          <span className="difference">Brecha de mercado {producto.Diferencia_Porcentual}%</span>
         )}
       </div>
+
+      <p className={`accion-sugerida tone-${mTier.tone}`}>
+        <span className="accion-dot" /> {mTier.accion}
+      </p>
     </div>
   );
 }

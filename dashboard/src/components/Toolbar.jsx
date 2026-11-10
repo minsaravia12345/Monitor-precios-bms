@@ -26,17 +26,21 @@ export default function Toolbar({
           className={`tab-btn ${tabActivo === 'explorar' ? 'active' : ''}`}
           onClick={() => setTabActivo('explorar')}
         >
-          Explorar todo
+          Catálogo
         </button>
         <button
           type="button"
           role="tab"
           aria-selected={tabActivo === 'killers'}
-          className={`tab-btn ${tabActivo === 'killers' ? 'active' : ''}`}
+          className={`tab-btn tab-btn-alert ${tabActivo === 'killers' ? 'active' : ''}`}
           onClick={() => setTabActivo('killers')}
+          aria-describedby="oportunidades-hint"
         >
-          Estratégicos
+          Oportunidades
         </button>
+        <span id="oportunidades-hint" className="visually-hidden">
+          Productos con Market Opportunity Score (MOS) mayor o igual a 65
+        </span>
       </div>
 
       <div className="search-box">
@@ -82,7 +86,7 @@ export default function Toolbar({
         onChange={(e) => setFiltroGanador(e.target.value)}
         aria-label="Filtrar por ganador"
       >
-        <option value="Todos">Cualquier ganador</option>
+        <option value="Todos">Cualquier ganador de precio</option>
         {farmaciasVisibles.map((f) => (
           <option key={f.key} value={f.label}>
             Gana {f.label}
@@ -99,7 +103,10 @@ export default function Toolbar({
         onChange={(e) => setSortBy(e.target.value)}
         aria-label="Ordenar productos"
       >
-        <option value="ahorro_desc">Mayor ahorro</option>
+        <option value="mos_desc">Mayor oportunidad (MOS)</option>
+        <option value="price_index_desc">Price Index más alto</option>
+        <option value="promo_desc">Mayor presión promocional</option>
+        <option value="ahorro_desc">Mayor brecha de mercado</option>
         <option value="precio_asc">Menor precio</option>
         <option value="nombre_asc">Nombre A-Z</option>
       </select>

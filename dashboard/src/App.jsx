@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
+import IntelligenceSummary from './components/IntelligenceSummary';
 import StatsOverview from './components/StatsOverview';
 import Toolbar from './components/Toolbar';
 import ProductGrid from './components/ProductGrid';
@@ -9,11 +10,12 @@ import Skeleton from './components/Skeleton';
 import Footer from './components/Footer';
 import { useTheme } from './hooks/useTheme';
 import { normalizarTexto, parseNumero } from './utils/format';
+import { calcularMetricas } from './utils/metrics';
 import './index.css';
 
 const FARMACIAS = [
-  { key: 'Central_Oeste', label: 'Central Oeste', color: '#60a5fa' },
   { key: 'Farmacity', label: 'Farmacity', color: '#f472b6' },
+  { key: 'Central_Oeste', label: 'Central Oeste', color: '#60a5fa' },
   { key: 'Farmaonline', label: 'Farmaonline', color: '#fbbf24' },
   { key: 'MercadoLibre', label: 'MercadoLibre', color: '#34d399' },
 ];
@@ -32,7 +34,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [filtroGrupo, setFiltroGrupo] = useState('Todos');
   const [filtroGanador, setFiltroGanador] = useState('Todos');
-  const [sortBy, setSortBy] = useState('ahorro_desc');
+  const [sortBy, setSortBy] = useState('mos_desc');
   const [page, setPage] = useState(1);
 
   const filterKey = `${tabActivo}|${search}|${filtroGrupo}|${filtroGanador}|${sortBy}`;
@@ -65,13 +67,18 @@ function App() {
     [productos]
   );
 
+  const productosConMetricas = useMemo(
+    () => productos.map((p) => ({ ...p, metricas: calcularMetricas(p, farmaciasVisibles.length || 1) })),
+    [productos, farmaciasVisibles]
+  );
+
   const grupos = useMemo(() => ['Todos', ...new Set(productos.map((p) => p.Grupo))], [productos]);
 
   const productosFiltrados = useMemo(() => {
     const term = normalizarTexto(search.trim());
 
-    const filtrados = productos.filter((p) => {
-      const matchTab = tabActivo === 'killers' ? p.Es_Killer : true;
+    const filtrados = productosConMetricas.filter((p) => {
+      const matchTab = tabActivo === 'killers' ? p.metricas.mos >= 65 : true;
       const matchGrupo = filtroGrupo === 'Todos' || String(p.Grupo) === String(filtroGrupo);
       const matchGanador =
         filtroGanador === 'Todos' || (p.Ganador && String(p.Ganador).includes(filtroGanador));
@@ -89,9 +96,16 @@ function App() {
         const pb = parseNumero(b.MejorPrecio) ?? Infinity;
         return pa - pb;
       }
-      return (b.Diferencia_Porcentual || 0) - (a.Diferencia_Porcentual || 0);
+      if (sortBy === 'price_index_desc') {
+        const pa = a.metricas.priceIndex ?? -1;
+        const pb = b.metricas.priceIndex ?? -1;
+        return pb - pa;
+      }
+      if (sortBy === 'promo_desc') return b.metricas.promoPressure - a.metricas.promoPressure;
+      if (sortBy === 'ahorro_desc') return (b.Diferencia_Porcentual || 0) - (a.Diferencia_Porcentual || 0);
+      return b.metricas.mos - a.metricas.mos;
     });
-  }, [productos, tabActivo, filtroGrupo, filtroGanador, search, sortBy]);
+  }, [productosConMetricas, tabActivo, filtroGrupo, filtroGanador, search, sortBy]);
 
   const totalPages = Math.max(1, Math.ceil(productosFiltrados.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -109,6 +123,27 @@ function App() {
     }));
     return { total: productos.length, killers, porFarmacia };
   }, [productos, farmaciasVisibles]);
+
+  const intel = useMemo(() => {
+    if (productosConMetricas.length === 0) {
+      return { priceIndex: null, promoPressure: 0, visibilityIndex: 0, mos: 0, oportunidadesCriticas: 0 };
+    }
+    const conPriceIndex = productosConMetricas.filter((p) => p.metricas.priceIndex !== null);
+    const priceIndex = conPriceIndex.length
+      ? Math.round(conPriceIndex.reduce((sum, p) => sum + p.metricas.priceIndex, 0) / conPriceIndex.length)
+      : null;
+    const promoPressure = Math.round(
+      productosConMetricas.reduce((sum, p) => sum + p.metricas.promoPressure, 0) / productosConMetricas.length
+    );
+    const visibilityIndex = Math.round(
+      productosConMetricas.reduce((sum, p) => sum + p.metricas.visibilityIndex, 0) / productosConMetricas.length
+    );
+    const mos = Math.round(
+      productosConMetricas.reduce((sum, p) => sum + p.metricas.mos, 0) / productosConMetricas.length
+    );
+    const oportunidadesCriticas = productosConMetricas.filter((p) => p.metricas.mos >= 65).length;
+    return { priceIndex, promoPressure, visibilityIndex, mos, oportunidadesCriticas };
+  }, [productosConMetricas]);
 
   const limpiarFiltros = () => {
     setSearch('');
@@ -131,8 +166,11 @@ function App() {
 
       <main className="app-shell">
         <div className="page-intro">
-          <h2>Comparativa de precios</h2>
-          <p>Seguimiento diario de precios en farmacias y marketplaces para detectar las mejores oportunidades.</p>
+          <h2>Inteligencia competitiva de precios</h2>
+          <p>
+            Monitoreo diario de Central Oeste, Farmaonline y MercadoLibre para detectar riesgos y
+            oportunidades de reprecificación frente a Farmacity.
+          </p>
         </div>
 
         {error && <div className="error-banner">{error}</div>}
@@ -141,6 +179,16 @@ function App() {
           <Skeleton count={8} />
         ) : (
           <>
+            <h3 className="section-label">Indicadores de inteligencia competitiva</h3>
+            <IntelligenceSummary
+              priceIndex={intel.priceIndex}
+              promoPressure={intel.promoPressure}
+              visibilityIndex={intel.visibilityIndex}
+              mos={intel.mos}
+              oportunidadesCriticas={intel.oportunidadesCriticas}
+            />
+
+            <h3 className="section-label">Resumen del catálogo</h3>
             <StatsOverview total={stats.total} killers={stats.killers} porFarmacia={stats.porFarmacia} />
 
             <Toolbar
@@ -162,6 +210,7 @@ function App() {
               <span>
                 <strong>{productosFiltrados.length}</strong> resultado
                 {productosFiltrados.length !== 1 ? 's' : ''}
+                {tabActivo === 'killers' && ' con Market Opportunity Score ≥ 65'}
               </span>
               {hayFiltrosActivos && (
                 <button type="button" className="clear-filters-btn" onClick={limpiarFiltros}>

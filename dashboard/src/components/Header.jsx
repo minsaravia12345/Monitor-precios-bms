@@ -9,12 +9,15 @@ export default function Header({ ultimaActualizacion, theme, onToggleTheme }) {
             <IconTarget width={20} height={20} />
           </span>
           <div className="brand-text">
-            <h1>SmartPrice Tracker</h1>
-            <p>Comparativa de precios multi-farmacia</p>
+            <h1>
+              Farmacity <span className="brand-text-light">Pricing Intelligence</span>
+            </h1>
+            <p>Monitoreo competitivo · Uso interno, equipo Pricing &amp; Revenue</p>
           </div>
         </div>
 
         <div className="topbar-right">
+          <span className="internal-pill">Uso interno</span>
           {ultimaActualizacion && (
             <span className="sync-info">
               <IconClock width={15} height={15} />
