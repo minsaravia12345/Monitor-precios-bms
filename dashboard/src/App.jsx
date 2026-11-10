@@ -3,6 +3,7 @@ import Header from './components/Header';
 import IntelligenceSummary from './components/IntelligenceSummary';
 import StatsOverview from './components/StatsOverview';
 import Toolbar from './components/Toolbar';
+import AdvancedFilters from './components/AdvancedFilters';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
 import EmptyState from './components/EmptyState';
@@ -37,7 +38,13 @@ function App() {
   const [sortBy, setSortBy] = useState('mos_desc');
   const [page, setPage] = useState(1);
 
-  const filterKey = `${tabActivo}|${search}|${filtroGrupo}|${filtroGanador}|${sortBy}`;
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [filtroStock, setFiltroStock] = useState('Todos');
+  const [filtroBrechaMin, setFiltroBrechaMin] = useState(0);
+  const [filtroDescuento, setFiltroDescuento] = useState('Todos');
+  const [soloPerdiendo, setSoloPerdiendo] = useState(false);
+
+  const filterKey = `${tabActivo}|${search}|${filtroGrupo}|${filtroGanador}|${sortBy}|${filtroStock}|${filtroBrechaMin}|${filtroDescuento}|${soloPerdiendo}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (filterKey !== lastFilterKey) {
     setLastFilterKey(filterKey);
@@ -86,7 +93,28 @@ function App() {
         !term ||
         normalizarTexto(p.Nombre).includes(term) ||
         normalizarTexto(p.EAN).includes(term);
-      return matchTab && matchGrupo && matchGanador && matchSearch;
+
+      const datosFarmacity = p.Precios?.Farmacity;
+      const matchStock =
+        filtroStock === 'Todos' ||
+        (filtroStock === 'No comercializado' && !datosFarmacity) ||
+        (filtroStock === 'Con stock' && datosFarmacity?.Stock === 'Con Stock') ||
+        (filtroStock === 'Sin stock' && datosFarmacity && datosFarmacity.Stock !== 'Con Stock');
+
+      const matchDescuento =
+        filtroDescuento === 'Todos' ||
+        (filtroDescuento === 'Con descuento' && Number(datosFarmacity?.Descuento) > 0) ||
+        (filtroDescuento === 'Sin descuento' && !(Number(datosFarmacity?.Descuento) > 0));
+
+      const matchBrecha = (p.Diferencia_Porcentual || 0) >= filtroBrechaMin;
+
+      const matchPerdiendo =
+        !soloPerdiendo ||
+        (!!datosFarmacity && !(p.Ganador && String(p.Ganador).includes('Farmacity')));
+
+      return (
+        matchTab && matchGrupo && matchGanador && matchSearch && matchStock && matchDescuento && matchBrecha && matchPerdiendo
+      );
     });
 
     return [...filtrados].sort((a, b) => {
@@ -105,7 +133,18 @@ function App() {
       if (sortBy === 'ahorro_desc') return (b.Diferencia_Porcentual || 0) - (a.Diferencia_Porcentual || 0);
       return b.metricas.mos - a.metricas.mos;
     });
-  }, [productosConMetricas, tabActivo, filtroGrupo, filtroGanador, search, sortBy]);
+  }, [
+    productosConMetricas,
+    tabActivo,
+    filtroGrupo,
+    filtroGanador,
+    search,
+    sortBy,
+    filtroStock,
+    filtroBrechaMin,
+    filtroDescuento,
+    soloPerdiendo,
+  ]);
 
   const totalPages = Math.max(1, Math.ceil(productosFiltrados.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -150,10 +189,24 @@ function App() {
     setFiltroGrupo('Todos');
     setFiltroGanador('Todos');
     setTabActivo('explorar');
+    setFiltroStock('Todos');
+    setFiltroBrechaMin(0);
+    setFiltroDescuento('Todos');
+    setSoloPerdiendo(false);
   };
 
+  const advancedCount =
+    (filtroStock !== 'Todos' ? 1 : 0) +
+    (filtroBrechaMin > 0 ? 1 : 0) +
+    (filtroDescuento !== 'Todos' ? 1 : 0) +
+    (soloPerdiendo ? 1 : 0);
+
   const hayFiltrosActivos =
-    Boolean(search) || filtroGrupo !== 'Todos' || filtroGanador !== 'Todos' || tabActivo !== 'explorar';
+    Boolean(search) ||
+    filtroGrupo !== 'Todos' ||
+    filtroGanador !== 'Todos' ||
+    tabActivo !== 'explorar' ||
+    advancedCount > 0;
 
   const handlePageChange = (p) => {
     setPage(p);
@@ -204,7 +257,25 @@ function App() {
               setFiltroGanador={setFiltroGanador}
               sortBy={sortBy}
               setSortBy={setSortBy}
+              filtersOpen={filtersOpen}
+              onToggleFilters={() => setFiltersOpen((v) => !v)}
+              advancedCount={advancedCount}
             />
+
+            {filtersOpen && (
+              <div id="advanced-filters-panel">
+                <AdvancedFilters
+                  filtroStock={filtroStock}
+                  setFiltroStock={setFiltroStock}
+                  filtroBrechaMin={filtroBrechaMin}
+                  setFiltroBrechaMin={setFiltroBrechaMin}
+                  filtroDescuento={filtroDescuento}
+                  setFiltroDescuento={setFiltroDescuento}
+                  soloPerdiendo={soloPerdiendo}
+                  setSoloPerdiendo={setSoloPerdiendo}
+                />
+              </div>
+            )}
 
             <div className="results-meta">
               <span>

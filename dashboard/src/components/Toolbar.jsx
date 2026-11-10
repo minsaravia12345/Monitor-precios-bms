@@ -1,4 +1,4 @@
-import { IconSearch, IconX } from './Icons';
+import { IconSearch, IconX, IconFilter } from './Icons';
 
 export default function Toolbar({
   tabActivo,
@@ -13,6 +13,9 @@ export default function Toolbar({
   setFiltroGanador,
   sortBy,
   setSortBy,
+  filtersOpen,
+  onToggleFilters,
+  advancedCount,
 }) {
   const mostrarGrupoSelect = grupos.length > 2;
 
@@ -94,6 +97,18 @@ export default function Toolbar({
         ))}
         <option value="Empate">Empate</option>
       </select>
+
+      <button
+        type="button"
+        className={`filters-toggle-btn ${filtersOpen ? 'active' : ''}`}
+        onClick={onToggleFilters}
+        aria-expanded={filtersOpen}
+        aria-controls="advanced-filters-panel"
+      >
+        <IconFilter width={15} height={15} />
+        Filtros
+        {advancedCount > 0 && <span className="filters-count-badge">{advancedCount}</span>}
+      </button>
 
       <div className="toolbar-spacer" />
 
