@@ -15,10 +15,11 @@ import { calcularMetricas } from './utils/metrics';
 import './index.css';
 
 const FARMACIAS = [
-  { key: 'Farmacity', label: 'Farmacity', color: '#f472b6' },
-  { key: 'Central_Oeste', label: 'Central Oeste', color: '#60a5fa' },
-  { key: 'Farmaonline', label: 'Farmaonline', color: '#fbbf24' },
-  { key: 'MercadoLibre', label: 'MercadoLibre', color: '#34d399' },
+  { key: 'Dia', label: 'Dia', color: '#ef4444' },
+  { key: 'Jumbo', label: 'Jumbo', color: '#22c55e' },
+  { key: 'Disco', label: 'Disco', color: '#f59e0b' },
+  { key: 'Carrefour', label: 'Carrefour', color: '#3b82f6' },
+  { key: 'Vea', label: 'Vea', color: '#a855f7' },
 ];
 
 const PAGE_SIZE = 24;
@@ -95,23 +96,24 @@ function App() {
         normalizarTexto(p.Nombre).includes(term) ||
         normalizarTexto(p.EAN).includes(term);
 
-      const datosFarmacity = p.Precios?.Farmacity;
+      const entradasPrecio = Object.values(p.Precios || {});
+      const totalCanales = farmaciasVisibles.length || 1;
+      const disponibleEn = Number(p.Disponible_En) || 0;
       const matchStock =
         filtroStock === 'Todos' ||
-        (filtroStock === 'No comercializado' && !datosFarmacity) ||
-        (filtroStock === 'Con stock' && datosFarmacity?.Stock === 'Con Stock') ||
-        (filtroStock === 'Sin stock' && datosFarmacity && datosFarmacity.Stock !== 'Con Stock');
+        (filtroStock === 'Todos los canales' && disponibleEn >= totalCanales && disponibleEn > 0) ||
+        (filtroStock === 'Algunos canales' && disponibleEn > 0 && disponibleEn < totalCanales) ||
+        (filtroStock === 'Sin disponibilidad' && disponibleEn === 0);
 
+      const algunDescuento = entradasPrecio.some((d) => Number(d?.Descuento) > 0);
       const matchDescuento =
         filtroDescuento === 'Todos' ||
-        (filtroDescuento === 'Con descuento' && Number(datosFarmacity?.Descuento) > 0) ||
-        (filtroDescuento === 'Sin descuento' && !(Number(datosFarmacity?.Descuento) > 0));
+        (filtroDescuento === 'Con descuento' && algunDescuento) ||
+        (filtroDescuento === 'Sin descuento' && !algunDescuento);
 
       const matchBrecha = (p.Diferencia_Porcentual || 0) >= filtroBrechaMin;
 
-      const matchPerdiendo =
-        !soloPerdiendo ||
-        (!!datosFarmacity && !(p.Ganador && String(p.Ganador).includes('Farmacity')));
+      const matchPerdiendo = !soloPerdiendo || (p.metricas.priceIndex !== null && p.metricas.priceIndex >= 120);
 
       const mejorPrecio = parseNumero(p.MejorPrecio);
       const matchPrecio =
@@ -152,6 +154,7 @@ function App() {
     });
   }, [
     productosConMetricas,
+    farmaciasVisibles,
     tabActivo,
     filtroGrupo,
     filtroGanador,
@@ -173,12 +176,12 @@ function App() {
   );
 
   const stats = useMemo(() => {
-    const killers = productos.filter((p) => p.Es_Killer).length;
+    const marcas = new Set(productos.map((p) => p.Grupo).filter(Boolean)).size;
     const porFarmacia = farmaciasVisibles.map((f) => ({
       ...f,
       count: productos.filter((p) => p.Ganador && p.Ganador.includes(f.label)).length,
     }));
-    return { total: productos.length, killers, porFarmacia };
+    return { total: productos.length, marcas, porFarmacia };
   }, [productos, farmaciasVisibles]);
 
   const intel = useMemo(() => {
@@ -239,10 +242,10 @@ function App() {
 
       <main className="app-shell">
         <div className="page-intro">
-          <h2>Inteligencia competitiva de precios</h2>
+          <h2>Inteligencia de precios multicanal</h2>
           <p>
-            Monitoreo diario de Central Oeste, Farmaonline y MercadoLibre para detectar riesgos y
-            oportunidades de reprecificación frente a Farmacity.
+            Monitoreo diario de los productos de Molinos Río de la Plata en Día, Jumbo, Disco, Carrefour
+            y Vea para detectar dispersión de precio y riesgo de conflicto de canal.
           </p>
         </div>
 
@@ -262,7 +265,7 @@ function App() {
             />
 
             <h3 className="section-label">Resumen del catálogo</h3>
-            <StatsOverview total={stats.total} killers={stats.killers} porFarmacia={stats.porFarmacia} />
+            <StatsOverview total={stats.total} marcas={stats.marcas} porFarmacia={stats.porFarmacia} />
 
             <Toolbar
               tabActivo={tabActivo}

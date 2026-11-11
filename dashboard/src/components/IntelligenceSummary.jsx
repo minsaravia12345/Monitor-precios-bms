@@ -20,9 +20,9 @@ export default function IntelligenceSummary({ priceIndex, promoPressure, visibil
       <div className={`intel-card tone-${pTier.tone}`}>
         <div className="intel-head">
           <span className="intel-label">Price Index</span>
-          <span className="intel-pill">vs. mercado</span>
+          <span className="intel-pill">entre canales</span>
         </div>
-        <div className="intel-value">{priceIndex === null ? '—' : priceIndex}</div>
+        <div className="intel-value">{priceIndex === null ? '—' : `${(priceIndex / 100).toFixed(2)}x`}</div>
         <Gauge value={priceIndex === null ? 0 : priceIndex} max={160} tone={pTier.tone} />
         <p className="intel-caption">{pTier.label}</p>
       </div>

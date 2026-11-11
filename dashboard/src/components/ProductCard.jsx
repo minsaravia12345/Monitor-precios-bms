@@ -1,20 +1,16 @@
 import { esNumeroValido, parseNumero, formatearPrecio } from '../utils/format';
 import { tierMOS } from '../utils/metrics';
 
-const FARMACITY_KEY = 'Farmacity';
-
 function PharmacyRow({ prod, farmacia }) {
   const pData = prod.Precios?.[farmacia.key];
   const isWinner = prod.Ganador && prod.Ganador.includes(farmacia.label);
-  const esFarmacity = farmacia.key === FARMACITY_KEY;
 
   if (!pData) {
     return (
-      <div className={`pharmacy-price unavailable ${esFarmacity ? 'is-self' : ''}`}>
+      <div className="pharmacy-price unavailable">
         <span className="pharmacy-name">
           <span className="store-dot" style={{ background: farmacia.color }} />
           {farmacia.label}
-          {esFarmacity && <span className="self-tag">Vos</span>}
         </span>
         <span className="no-avail">No disponible</span>
       </div>
@@ -25,11 +21,10 @@ function PharmacyRow({ prod, farmacia }) {
 
   if (sinStock) {
     return (
-      <div className={`pharmacy-price unavailable ${esFarmacity ? 'is-self' : ''}`}>
+      <div className="pharmacy-price unavailable">
         <span className="pharmacy-name">
           <span className="store-dot" style={{ background: farmacia.color }} />
           {farmacia.label}
-          {esFarmacity && <span className="self-tag">Vos</span>}
         </span>
         <span className="no-avail">Sin stock</span>
       </div>
@@ -47,12 +42,11 @@ function PharmacyRow({ prod, farmacia }) {
       href={pData.Link}
       target="_blank"
       rel="noreferrer"
-      className={`pharmacy-price ${isWinner ? 'winner' : ''} ${esFarmacity ? 'is-self' : ''}`}
+      className={`pharmacy-price ${isWinner ? 'winner' : ''}`}
     >
       <span className="pharmacy-name">
         <span className="store-dot" style={{ background: farmacia.color }} />
         {farmacia.label}
-        {esFarmacity && <span className="self-tag">Vos</span>}
       </span>
       <div className="price-details">
         <span className={`actual-price ${esFinalNum ? 'currency' : ''} ${isWinner ? 'winner-text' : ''}`}>
@@ -68,15 +62,16 @@ function PharmacyRow({ prod, farmacia }) {
 }
 
 function etiquetaGanador(ganador) {
-  if (ganador === 'Empate') return 'Empate de mercado';
-  if (!ganador || ganador === 'Sin precio') return 'Sin precio en el mercado';
-  return `Gana ${ganador}`;
+  if (ganador === 'Empate') return 'Mismo precio en todos los canales';
+  if (!ganador || ganador === 'Sin precio') return 'Sin precio disponible';
+  return `Más barato en ${ganador}`;
 }
 
 export default function ProductCard({ producto, farmacias, delay }) {
   const esEmpate = producto.Ganador === 'Empate';
   const { priceIndex, promoPressure, mos } = producto.metricas;
   const mTier = tierMOS(mos);
+  const priceIndexRatio = priceIndex === null ? '—' : (priceIndex / 100).toFixed(2);
 
   return (
     <div
@@ -84,24 +79,22 @@ export default function ProductCard({ producto, farmacias, delay }) {
       style={{ animationDelay: `${delay}s` }}
     >
       <div className="card-head">
-        <span className={`group-badge ${producto.Es_Killer ? 'killer' : ''}`}>
-          {producto.Es_Killer ? '🎯 Producto estratégico' : producto.Grupo}
-        </span>
+        <span className="group-badge">{producto.Grupo}</span>
         {producto.EAN && producto.EAN !== 'N/A' && <span className="ean-tag">EAN {producto.EAN}</span>}
       </div>
 
       <h3 className="product-name">{producto.Nombre}</h3>
 
       <div className="metric-chips">
-        <span className="metric-chip" title="Price Index: precio de Farmacity vs. promedio competidor (100 = paridad)">
+        <span className="metric-chip" title="Price Index: ratio entre el precio más caro y el más barato entre canales (1.00 = mismo precio en todos)">
           <span className="metric-chip-label">Price Index</span>
-          <span className="metric-chip-value">{priceIndex === null ? '—' : priceIndex}</span>
+          <span className="metric-chip-value">{priceIndexRatio}</span>
         </span>
-        <span className="metric-chip" title="Promo Pressure: intensidad promocional de la competencia (0-100)">
+        <span className="metric-chip" title="Promo Pressure: % de los canales que tienen el producto con descuento activo">
           <span className="metric-chip-label">Promo</span>
           <span className="metric-chip-value">{promoPressure}</span>
         </span>
-        <span className={`metric-chip metric-chip-mos tone-${mTier.tone}`} title="Market Opportunity Score (0-100)">
+        <span className={`metric-chip metric-chip-mos tone-${mTier.tone}`} title="Market Opportunity Score: riesgo de conflicto de canal (0-100)">
           <span className="metric-chip-label">MOS</span>
           <span className="metric-chip-value">{mos}</span>
         </span>
@@ -118,7 +111,7 @@ export default function ProductCard({ producto, farmacias, delay }) {
           {etiquetaGanador(producto.Ganador)}
         </span>
         {producto.Diferencia_Porcentual > 0 && (
-          <span className="difference">Brecha de mercado {producto.Diferencia_Porcentual}%</span>
+          <span className="difference">Brecha entre canales {producto.Diferencia_Porcentual}%</span>
         )}
       </div>
 

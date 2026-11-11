@@ -10,9 +10,9 @@ export default function Header({ ultimaActualizacion, theme, onToggleTheme }) {
           </span>
           <div className="brand-text">
             <h1>
-              Farmacity <span className="brand-text-light">Pricing Intelligence</span>
+              Molinos S.A. <span className="brand-text-light">Pricing Intelligence</span>
             </h1>
-            <p>Monitoreo competitivo · Uso interno, equipo Pricing &amp; Revenue</p>
+            <p>Solución desarrollada para Molinos Río de la Plata · Equipo Pricing &amp; Revenue</p>
           </div>
         </div>
 

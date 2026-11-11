@@ -1,7 +1,5 @@
 import { parseNumero } from './format';
 
-const FARMACITY_KEY = 'Farmacity';
-
 function preciosEntries(producto) {
   return Object.entries(producto.Precios || {});
 }
@@ -13,99 +11,89 @@ function precioValido(data) {
 }
 
 /**
- * Price Index: precio de Farmacity respecto al promedio de la competencia.
- * 100 = paridad, >100 = Farmacity más caro, <100 = Farmacity más barato.
- * null = Farmacity no tiene oferta activa o no hay competencia con precio para comparar.
+ * Price Index: dispersión de precio entre los retailers que venden el
+ * producto, como ratio (precio más caro / precio más barato) * 100.
+ * 100 = todos cobran lo mismo. Cuanto más alto, mayor diferencia entre el
+ * canal más caro y el más barato: riesgo de conflicto de canal para la marca.
+ * null = no hay al menos 2 retailers con precio válido para comparar.
  */
 export function calcularPriceIndex(producto) {
-  const fPrecio = precioValido(producto.Precios?.[FARMACITY_KEY]);
-  if (fPrecio === null) return null;
-
-  const competidores = preciosEntries(producto)
-    .filter(([key]) => key !== FARMACITY_KEY)
+  const precios = preciosEntries(producto)
     .map(([, data]) => precioValido(data))
-    .filter((n) => n !== null);
+    .filter((n) => n !== null && n > 0);
 
-  if (competidores.length === 0) return null;
+  if (precios.length < 2) return null;
 
-  const promedio = competidores.reduce((a, b) => a + b, 0) / competidores.length;
-  if (!promedio) return null;
+  const min = Math.min(...precios);
+  const max = Math.max(...precios);
+  if (!min) return null;
 
-  return Math.round((fPrecio / promedio) * 100);
+  return Math.round((max / min) * 100);
 }
 
 /**
- * Promo Pressure: qué tan agresiva es la competencia con descuentos frente a Farmacity.
- * Escala 0-100. 50 = equilibrio, >50 = la competencia descuenta más fuerte que Farmacity.
+ * Promo Pressure: qué fracción de los retailers que tienen el producto en
+ * stock lo están vendiendo hoy con descuento activo. Escala 0-100.
  */
 export function calcularPromoPressure(producto) {
-  const fData = producto.Precios?.[FARMACITY_KEY];
-  const fDescuento = fData && fData.Stock !== 'Sin Stock' ? Number(fData.Descuento) || 0 : 0;
+  const conStock = preciosEntries(producto).filter(([, data]) => data.Stock !== 'Sin Stock');
+  if (conStock.length === 0) return 0;
 
-  const descuentosCompetencia = preciosEntries(producto)
-    .filter(([key]) => key !== FARMACITY_KEY)
-    .map(([, data]) => (data.Stock !== 'Sin Stock' ? Number(data.Descuento) || 0 : null))
-    .filter((n) => n !== null);
-
-  if (descuentosCompetencia.length === 0) return 50;
-
-  const maxCompetencia = Math.max(...descuentosCompetencia);
-  const presion = 50 + (maxCompetencia - fDescuento);
-  return Math.max(0, Math.min(100, Math.round(presion)));
+  const conDescuento = conStock.filter(([, data]) => Number(data.Descuento) > 0).length;
+  return Math.round((conDescuento / conStock.length) * 100);
 }
 
 /**
- * Visibility Index: cobertura real del producto por parte de Farmacity,
- * relativa a la cantidad de canales donde el producto está disponible.
+ * Visibility Index: en qué fracción de los retailers monitoreados está
+ * efectivamente disponible el producto (con precio válido).
  */
-export function calcularVisibilityIndex(producto, totalFarmacias) {
-  const fTienePrecio = precioValido(producto.Precios?.[FARMACITY_KEY]) !== null;
-  if (!totalFarmacias) return fTienePrecio ? 100 : 0;
+export function calcularVisibilityIndex(producto, totalRetailers) {
+  if (!totalRetailers) return 0;
   const disponibleEn = Number(producto.Disponible_En) || 0;
-  const base = Math.round((disponibleEn / totalFarmacias) * 100);
-  return fTienePrecio ? base : Math.round(base * 0.4);
+  return Math.round((disponibleEn / totalRetailers) * 100);
 }
 
 /**
- * Market Opportunity Score (MOS): prioriza qué productos conviene accionar primero.
- * Combina brecha de precio, presión promocional y visibilidad. Escala 0-100.
+ * Market Opportunity Score (MOS): prioriza qué productos conviene revisar
+ * primero por riesgo de conflicto de canal, combinando dispersión de
+ * precio, presión promocional y cobertura. Escala 0-100.
  */
 export function calcularMOS({ priceIndex, promoPressure, visibilityIndex }) {
-  const gapScore = priceIndex === null ? 82 : Math.max(0, Math.min(100, priceIndex - 50));
+  const gapScore = priceIndex === null ? 20 : Math.max(0, Math.min(100, (priceIndex - 100) * 2));
   const visGap = 100 - visibilityIndex;
-  const score = 0.45 * gapScore + 0.35 * promoPressure + 0.2 * visGap;
+  const score = 0.5 * gapScore + 0.3 * promoPressure + 0.2 * visGap;
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
-export function calcularMetricas(producto, totalFarmacias) {
+export function calcularMetricas(producto, totalRetailers) {
   const priceIndex = calcularPriceIndex(producto);
   const promoPressure = calcularPromoPressure(producto);
-  const visibilityIndex = calcularVisibilityIndex(producto, totalFarmacias);
+  const visibilityIndex = calcularVisibilityIndex(producto, totalRetailers);
   const mos = calcularMOS({ priceIndex, promoPressure, visibilityIndex });
   return { priceIndex, promoPressure, visibilityIndex, mos };
 }
 
 export function tierPriceIndex(valor) {
-  if (valor === null) return { label: 'Sin oferta activa', tone: 'critical' };
-  if (valor <= 97) return { label: 'Más barato que el mercado', tone: 'good' };
-  if (valor <= 103) return { label: 'En paridad con el mercado', tone: 'neutral' };
-  return { label: 'Por encima del mercado', tone: 'critical' };
+  if (valor === null) return { label: 'Sin datos suficientes', tone: 'neutral' };
+  if (valor <= 105) return { label: 'Precio consistente entre canales', tone: 'good' };
+  if (valor <= 120) return { label: 'Dispersión moderada entre canales', tone: 'neutral' };
+  return { label: 'Alta dispersión: riesgo de conflicto de canal', tone: 'critical' };
 }
 
 export function tierPromoPressure(valor) {
-  if (valor < 40) return { label: 'Presión baja', tone: 'good' };
-  if (valor <= 60) return { label: 'Presión moderada', tone: 'neutral' };
-  return { label: 'Presión alta de la competencia', tone: 'critical' };
+  if (valor < 30) return { label: 'Baja actividad promocional', tone: 'good' };
+  if (valor <= 60) return { label: 'Actividad promocional moderada', tone: 'neutral' };
+  return { label: 'Alta actividad promocional en el canal', tone: 'critical' };
 }
 
 export function tierVisibility(valor) {
-  if (valor >= 90) return { label: 'Cobertura alta', tone: 'good' };
-  if (valor >= 70) return { label: 'Cobertura media', tone: 'neutral' };
-  return { label: 'Cobertura baja', tone: 'critical' };
+  if (valor >= 80) return { label: 'Presente en casi todos los canales', tone: 'good' };
+  if (valor >= 50) return { label: 'Presencia parcial en el canal', tone: 'neutral' };
+  return { label: 'Baja presencia en el canal', tone: 'critical' };
 }
 
 export function tierMOS(valor) {
-  if (valor >= 65) return { label: 'Alta oportunidad', tone: 'critical', accion: 'Ajustar precio ahora' };
-  if (valor >= 35) return { label: 'Oportunidad moderada', tone: 'neutral', accion: 'Monitorear de cerca' };
-  return { label: 'Oportunidad baja', tone: 'good', accion: 'Posición sólida' };
+  if (valor >= 65) return { label: 'Alto riesgo de canal', tone: 'critical', accion: 'Revisar pricing con el canal ahora' };
+  if (valor >= 35) return { label: 'Riesgo moderado', tone: 'neutral', accion: 'Monitorear de cerca' };
+  return { label: 'Bajo riesgo', tone: 'good', accion: 'Consistencia saludable' };
 }

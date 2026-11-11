@@ -28,7 +28,7 @@ export default function AdvancedFilters({
       </div>
 
       <div className="advanced-filter-field">
-        <label htmlFor="filtro-stock">Stock en Farmacity</label>
+        <label htmlFor="filtro-stock">Disponibilidad</label>
         <select
           id="filtro-stock"
           className="select-field"
@@ -36,9 +36,9 @@ export default function AdvancedFilters({
           onChange={(e) => setFiltroStock(e.target.value)}
         >
           <option value="Todos">Cualquier estado</option>
-          <option value="Con stock">Con stock</option>
-          <option value="Sin stock">Sin stock</option>
-          <option value="No comercializado">No se vende en Farmacity</option>
+          <option value="Todos los canales">Disponible en todos los canales</option>
+          <option value="Algunos canales">Disponible solo en algunos canales</option>
+          <option value="Sin disponibilidad">Sin stock en ningún canal</option>
         </select>
       </div>
 
@@ -58,7 +58,7 @@ export default function AdvancedFilters({
       </div>
 
       <div className="advanced-filter-field">
-        <label htmlFor="filtro-descuento">Descuento en Farmacity</label>
+        <label htmlFor="filtro-descuento">Descuento</label>
         <select
           id="filtro-descuento"
           className="select-field"
@@ -66,8 +66,8 @@ export default function AdvancedFilters({
           onChange={(e) => setFiltroDescuento(e.target.value)}
         >
           <option value="Todos">Cualquiera</option>
-          <option value="Con descuento">Con descuento activo</option>
-          <option value="Sin descuento">Sin descuento</option>
+          <option value="Con descuento">Con descuento en algún canal</option>
+          <option value="Sin descuento">Sin descuento en ningún canal</option>
         </select>
       </div>
 
@@ -77,7 +77,7 @@ export default function AdvancedFilters({
           checked={soloPerdiendo}
           onChange={(e) => setSoloPerdiendo(e.target.checked)}
         />
-        Solo donde Farmacity pierde
+        Solo con alta dispersión de precio
       </label>
     </div>
   );

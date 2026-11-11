@@ -1,6 +1,6 @@
 import { IconLayers, IconTarget, IconStore } from './Icons';
 
-export default function StatsOverview({ total, killers, porFarmacia }) {
+export default function StatsOverview({ total, marcas, porFarmacia }) {
   return (
     <div className="stats-grid">
       <div className="stat-tile" style={{ '--tile-color': '#60a5fa' }}>
@@ -18,8 +18,8 @@ export default function StatsOverview({ total, killers, porFarmacia }) {
           <IconTarget width={18} height={18} />
         </span>
         <div className="stat-body">
-          <span className="stat-value">{killers}</span>
-          <span className="stat-label">Productos estratégicos</span>
+          <span className="stat-value">{marcas}</span>
+          <span className="stat-label">Marcas Molinos monitoreadas</span>
         </div>
       </div>
 
