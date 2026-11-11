@@ -1153,6 +1153,13 @@ a:focus-visible {
   color: var(--text-tertiary);
 }
 
+.app-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
 .app-footer a {
   display: inline-flex;
   align-items: center;
@@ -1164,6 +1171,14 @@ a:focus-visible {
 
 .app-footer a:hover {
   color: var(--text-primary);
+}
+
+.footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* ============ Animations ============ */

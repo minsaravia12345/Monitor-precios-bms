@@ -125,6 +125,14 @@ export function IconGithub(props) {
   );
 }
 
+export function IconSparkle(props) {
+  return (
+    <svg viewBox="0 0 24 24" width={14} height={14} fill="currentColor" {...props}>
+      <path d="M12 2.5l1.8 5.2a3 3 0 0 0 1.9 1.9l5.2 1.8-5.2 1.8a3 3 0 0 0-1.9 1.9L12 21.3l-1.8-5.2a3 3 0 0 0-1.9-1.9L3.1 11.4l5.2-1.8a3 3 0 0 0 1.9-1.9z" />
+    </svg>
+  );
+}
+
 export function IconFilter(props) {
   return (
     <svg {...base} {...props}>
