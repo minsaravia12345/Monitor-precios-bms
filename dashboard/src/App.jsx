@@ -137,6 +137,13 @@ function App() {
     });
 
     return [...filtrados].sort((a, b) => {
+      // Los productos que efectivamente encontramos en algun canal van
+      // siempre primero; los que no se encontraron en ningun lado (sin
+      // precio para comparar) quedan al final, sea cual sea el orden elegido.
+      const encontradoA = (a.Disponible_En || 0) > 0 ? 0 : 1;
+      const encontradoB = (b.Disponible_En || 0) > 0 ? 0 : 1;
+      if (encontradoA !== encontradoB) return encontradoA - encontradoB;
+
       if (sortBy === 'nombre_asc') return a.Nombre.localeCompare(b.Nombre);
       if (sortBy === 'precio_asc') {
         const pa = parseNumero(a.MejorPrecio) ?? Infinity;
