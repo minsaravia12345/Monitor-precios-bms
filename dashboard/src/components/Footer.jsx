@@ -11,7 +11,7 @@ export default function Footer({ ultimaActualizacion, totalVisible, totalGeneral
       <div className="app-footer-links">
         <span className="footer-credit">
           <IconSparkle />
-          Hecho con Súper IA
+          SCOUT
         </span>
         <a href="https://github.com/minsaravia12345/Monitor-precios-bms" target="_blank" rel="noreferrer">
           <IconGithub />
