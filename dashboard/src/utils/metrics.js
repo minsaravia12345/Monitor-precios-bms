@@ -33,14 +33,23 @@ export function calcularPriceIndex(producto) {
 
 /**
  * Promo Pressure: qué fracción de los retailers que tienen el producto en
- * stock lo están vendiendo hoy con descuento activo. Escala 0-100.
+ * stock lo están vendiendo hoy con descuento activo o con una promoción
+ * condicionada (tarjeta del canal, 2x1, etc.). Escala 0-100.
+ *
+ * En los supermercados argentinos la promo real casi nunca baja el precio
+ * de góndola (Price/ListPrice): es un descuento condicionado que VTEX
+ * expone aparte (ej. "Tarjeta Carrefour 15%"), guardado acá en
+ * `Promocion`. Contar solo Descuento > 0 subestima drásticamente la
+ * presión promocional real del canal.
  */
 export function calcularPromoPressure(producto) {
   const conStock = preciosEntries(producto).filter(([, data]) => data.Stock !== 'Sin Stock');
   if (conStock.length === 0) return 0;
 
-  const conDescuento = conStock.filter(([, data]) => Number(data.Descuento) > 0).length;
-  return Math.round((conDescuento / conStock.length) * 100);
+  const conPromo = conStock.filter(
+    ([, data]) => Number(data.Descuento) > 0 || Boolean(data.Promocion)
+  ).length;
+  return Math.round((conPromo / conStock.length) * 100);
 }
 
 /**

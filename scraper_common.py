@@ -459,6 +459,31 @@ def vtex_elegir_sku(res_item, ean_target):
     return primero, str(primero.get("ean", "")).strip()
 
 
+def _campo_vtex(d, clave):
+    """VTEX a veces serializa los sub-objetos de Teasers con el nombre
+    'crudo' de la propiedad .NET en vez del nombre limpio (ej.
+    '<Name>k__BackingField' en lugar de 'Name'). Prueba ambas formas."""
+    if clave in d:
+        return d[clave]
+    return d.get(f"<{clave}>k__BackingField")
+
+
+def vtex_extraer_promociones(offer):
+    """Las promos 'reales' en los supermercados argentinos casi nunca bajan
+    el precio de gondola (Price/ListPrice): son descuentos condicionados
+    (tarjeta del super, dia de la semana, 2x1) que VTEX expone en
+    'Teasers', no en el precio. Sin esto, un producto puede mostrar 0% de
+    descuento en el dashboard cuando en realidad tiene, por ejemplo,
+    'Tarjeta Carrefour 15%' activo ahora mismo."""
+    teasers = offer.get("Teasers") or []
+    nombres = []
+    for teaser in teasers:
+        nombre = _campo_vtex(teaser, "Name")
+        if nombre and str(nombre).strip():
+            nombres.append(str(nombre).strip())
+    return nombres
+
+
 def vtex_extraer_oferta(sku_item):
     """Convierte la oferta comercial de VTEX en los campos que usa el
     dashboard. Devuelve None si el SKU no tiene seller/oferta disponible."""
@@ -470,7 +495,13 @@ def vtex_extraer_oferta(sku_item):
     cantidad_disponible = int(offer.get("AvailableQuantity", 0) or 0)
 
     if cantidad_disponible == 0:
-        return {"Precio_Final": "Sin Stock", "Precio_Lista": "Sin Stock", "Descuento": 0, "Stock": "Sin Stock"}
+        return {
+            "Precio_Final": "Sin Stock",
+            "Precio_Lista": "Sin Stock",
+            "Descuento": 0,
+            "Stock": "Sin Stock",
+            "Promocion": "",
+        }
 
     precio_final = int(float(offer.get("Price", 0) or 0))
     precio_lista = int(float(offer.get("ListPrice", 0) or 0))
@@ -488,7 +519,15 @@ def vtex_extraer_oferta(sku_item):
             precio_lista = precio_final
             descuento = 0
 
-    return {"Precio_Final": precio_final, "Precio_Lista": precio_lista, "Descuento": descuento, "Stock": "Con Stock"}
+    promocion = " + ".join(vtex_extraer_promociones(offer))
+
+    return {
+        "Precio_Final": precio_final,
+        "Precio_Lista": precio_lista,
+        "Descuento": descuento,
+        "Stock": "Con Stock",
+        "Promocion": promocion,
+    }
 
 
 def vtex_armar_producto(nombre_retailer, res_item, sku_item, ean_api, k, metodo):
@@ -507,6 +546,7 @@ def vtex_armar_producto(nombre_retailer, res_item, sku_item, ean_api, k, metodo)
         "Precio_Final": oferta["Precio_Final"],
         "Porcentaje_Oferta": oferta["Descuento"],
         "Stock": oferta["Stock"],
+        "Promocion": oferta.get("Promocion", ""),
         "Link": res_item.get("link", ""),
         "EAN_Original": k["ean"],
         "Nombre_Original": k["nombre_raw"],

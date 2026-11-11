@@ -56,6 +56,7 @@ function PharmacyRow({ prod, farmacia }) {
           )}
         </span>
         {hayTachado && <span className="list-price currency">{formatearPrecio(pData.Precio_Lista)}</span>}
+        {pData.Promocion && <span className="promo-tag">{pData.Promocion}</span>}
       </div>
     </a>
   );
@@ -90,7 +91,7 @@ export default function ProductCard({ producto, farmacias, delay }) {
           <span className="metric-chip-label">Price Index</span>
           <span className="metric-chip-value">{priceIndexRatio}</span>
         </span>
-        <span className="metric-chip" title="Promo Pressure: % de los canales que tienen el producto con descuento activo">
+        <span className="metric-chip" title="Promo Pressure: % de los canales con descuento activo o promo condicionada (tarjeta, 2x1, etc.)">
           <span className="metric-chip-label">Promo</span>
           <span className="metric-chip-value">{promoPressure}</span>
         </span>

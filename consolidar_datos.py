@@ -78,11 +78,13 @@ for _, row in df_total.iterrows():
         if c not in scraping_index:
             scraping_index[c] = {"Precios": {}}
 
+        promocion = row.get("Promocion", "")
         scraping_index[c]["Precios"][row["Retailer"]] = {
             "Precio_Final": row["Precio_Final"],
             "Precio_Lista": row["Precio_Lista"],
             "Descuento": row.get("Porcentaje_Oferta", 0),
             "Stock": row.get("Stock", "Con Stock"),
+            "Promocion": promocion if isinstance(promocion, str) else "",
             "Link": row.get("Link", "#"),
         }
 
@@ -190,6 +192,7 @@ for v in lista_final:
         fila[f"{nombre_retailer} - Precio Final"] = d.get("Precio_Final", "")
         fila[f"{nombre_retailer} - Precio Lista"] = d.get("Precio_Lista", "")
         fila[f"{nombre_retailer} - Descuento %"] = d.get("Descuento", "")
+        fila[f"{nombre_retailer} - Promocion"] = d.get("Promocion", "")
         fila[f"{nombre_retailer} - Stock"] = d.get("Stock", "No Encontrado")
         fila[f"{nombre_retailer} - Link"] = d.get("Link", "")
     fila["Ganador"] = v.get("Ganador", "")
@@ -245,7 +248,7 @@ with pd.ExcelWriter(OUTPUT_EXCEL, engine="openpyxl") as writer:
 
         for nombre_retailer in NOMBRES_RETAILERS:
             color = PALETA_RETAILERS.get(nombre_retailer, "F1F5F9")
-            for sufijo in ("Precio Final", "Precio Lista", "Descuento %", "Stock"):
+            for sufijo in ("Precio Final", "Precio Lista", "Descuento %", "Promocion", "Stock"):
                 col_idx = col_idx_por_nombre.get(f"{nombre_retailer} - {sufijo}")
                 if col_idx:
                     ws.cell(row=row_idx, column=col_idx).fill = PatternFill("solid", fgColor=color)
@@ -272,10 +275,11 @@ with pd.ExcelWriter(OUTPUT_EXCEL, engine="openpyxl") as writer:
     ws.column_dimensions["B"].width = 45
     ws.column_dimensions["C"].width = 14
     for nombre_retailer in NOMBRES_RETAILERS:
-        for sufijo in ("Precio Final", "Precio Lista", "Descuento %", "Stock", "Link"):
+        for sufijo in ("Precio Final", "Precio Lista", "Descuento %", "Promocion", "Stock", "Link"):
             col_idx = col_idx_por_nombre.get(f"{nombre_retailer} - {sufijo}")
             if col_idx:
-                ws.column_dimensions[get_column_letter(col_idx)].width = 15
+                ancho = 28 if sufijo == "Promocion" else 15
+                ws.column_dimensions[get_column_letter(col_idx)].width = ancho
 
     ws.freeze_panes = "A2"
 

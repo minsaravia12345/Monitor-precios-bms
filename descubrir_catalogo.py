@@ -45,15 +45,23 @@ RETAILERS = [
     ("Vea", "https://www.vea.com.ar"),
 ]
 
-PAGINAS_POR_MARCA = 2  # 2 x 50 = hasta 100 productos por marca por retailer
-TAMANO_PAGINA = 50
+TAMANO_PAGINA = 50  # maximo real que VTEX permite por pagina (_to > 49 da 400)
+TOPE_SEGURIDAD = 1000  # por marca+retailer, para no entrar en loop ante una respuesta rara
 PAUSA_ENTRE_REQUESTS = 0.3
 
 
 def buscar_marca(session, base_url, marca):
+    """Pagina hasta agotar TODOS los resultados reales de esta marca en este
+    retailer (usando el header 'resources: desde-hasta/total' de VTEX para
+    saber cuando parar), no solo las primeras 1-2 paginas. Antes el scraper
+    se quedaba con, como mucho, 100 productos por marca y retailer aunque el
+    catalogo real tuviera 300-400 (confirmado en vivo: 'gallo' solo en
+    Jumbo son 342 resultados)."""
     productos = {}
-    for pagina in range(PAGINAS_POR_MARCA):
-        desde = pagina * TAMANO_PAGINA
+    desde = 0
+    total_conocido = None
+
+    while desde < TOPE_SEGURIDAD:
         hasta = desde + TAMANO_PAGINA - 1
         url = f"{base_url}/api/catalog_system/pub/products/search?ft={urllib.parse.quote(marca)}&_from={desde}&_to={hasta}"
         try:
@@ -64,6 +72,14 @@ def buscar_marca(session, base_url, marca):
 
         if res.status_code not in (200, 206):
             break
+
+        if total_conocido is None:
+            recurso = res.headers.get("resources", "")
+            if "/" in recurso:
+                try:
+                    total_conocido = int(recurso.rsplit("/", 1)[-1])
+                except ValueError:
+                    total_conocido = None
 
         try:
             data = res.json()
@@ -93,6 +109,9 @@ def buscar_marca(session, base_url, marca):
                 "Marca": marca,
             }
 
+        desde += TAMANO_PAGINA
+        if total_conocido is not None and desde >= total_conocido:
+            break
         if len(data) < TAMANO_PAGINA:
             break
 
