@@ -137,12 +137,13 @@ function App() {
     });
 
     return [...filtrados].sort((a, b) => {
-      // Los productos que efectivamente encontramos en algun canal van
-      // siempre primero; los que no se encontraron en ningun lado (sin
-      // precio para comparar) quedan al final, sea cual sea el orden elegido.
-      const encontradoA = (a.Disponible_En || 0) > 0 ? 0 : 1;
-      const encontradoB = (b.Disponible_En || 0) > 0 ? 0 : 1;
-      if (encontradoA !== encontradoB) return encontradoA - encontradoB;
+      // Prioridad por cobertura: primero los productos que encontramos en
+      // TODOS los supermercados, despues en varios, y al final los que no
+      // se encontraron en ninguno. Esto manda adelante a los productos mas
+      // "completos" para comparar, sea cual sea el orden elegido despues.
+      const disponibleA = Number(a.Disponible_En) || 0;
+      const disponibleB = Number(b.Disponible_En) || 0;
+      if (disponibleA !== disponibleB) return disponibleB - disponibleA;
 
       if (sortBy === 'nombre_asc') return a.Nombre.localeCompare(b.Nombre);
       if (sortBy === 'precio_asc') {
