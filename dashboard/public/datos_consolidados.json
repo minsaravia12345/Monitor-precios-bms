@@ -1,5 +1,5 @@
 {
-    "ultima_actualizacion": "12/11/2026 12:22:50",
+    "ultima_actualizacion": "12/11/2026 12:31:10",
     "productos": [
         {
             "Id": "row_0",
@@ -446,6 +446,14 @@
             "Grupo": "Blancaflor",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2349,
+                    "Precio_Lista": 2349,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/harina-leudante-fortificada-blancaflor-1-kg-300778/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2350,
                     "Precio_Lista": 2350,
@@ -479,10 +487,10 @@
                     "Link": "https://www.vea.com.ar/harina-leudante-fort-blancaflor-1-kg/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 2349.0,
             "Diferencia_Porcentual": 1.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_12",
@@ -3168,6 +3176,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4370,
+                    "Precio_Lista": 4370,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceite-de-girasol-cocinero-900-ml-48605/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4650,
                     "Precio_Lista": 4650,
@@ -3204,7 +3220,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4369.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_92",
@@ -3249,6 +3265,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 6925,
+                    "Precio_Lista": 6925,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceite-de-girasol-cocinero-15-lt-25338/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 7350,
                     "Precio_Lista": 7350,
@@ -3285,7 +3309,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 6890.0,
             "Diferencia_Porcentual": 6.3,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_94",
@@ -4125,6 +4149,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3900,
+                    "Precio_Lista": 4900,
+                    "Descuento": 20.41,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceite-fritolim-clasico-cocinero-120-ml-300380/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5200,
                     "Precio_Lista": 5200,
@@ -4158,10 +4190,10 @@
                     "Link": "https://www.vea.com.ar/aceite-clasico-fritolim-126-cc-2/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 4899.0,
-            "Diferencia_Porcentual": 7.6,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 3900.0,
+            "Diferencia_Porcentual": 26.4,
+            "Disponible_En": 5
         },
         {
             "Id": "row_116",
@@ -4800,6 +4832,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 14060,
+                    "Precio_Lista": 14060,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceite-de-oliva-cocinero-extra-virgen-intenso-500-ml-276153/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 15000,
                     "Precio_Lista": 15000,
@@ -4836,7 +4876,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 13650.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_132",
@@ -4845,6 +4885,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 14060,
+                    "Precio_Lista": 14060,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceite-de-oliva-cocinero-extra-virgen-suave-500-ml-276154/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 15000,
                     "Precio_Lista": 15000,
@@ -4881,7 +4929,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 13650.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_133",
@@ -5237,6 +5285,14 @@
             "Grupo": "Cocinero",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3270,
+                    "Precio_Lista": 3270,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/aceto-balsamico-cocinero-250-ml-149352/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3500,
                     "Precio_Lista": 3500,
@@ -5270,10 +5326,10 @@
                     "Link": "https://www.vea.com.ar/aderezo-cocinero-250-ml/p"
                 }
             },
-            "Ganador": "Jumbo",
-            "MejorPrecio": 3500.0,
-            "Diferencia_Porcentual": 1.4,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 3270.0,
+            "Diferencia_Porcentual": 7.9,
+            "Disponible_En": 3
         },
         {
             "Id": "row_144",
@@ -7738,6 +7794,14 @@
             "Grupo": "Cruz de Malta",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4160,
+                    "Precio_Lista": 5200,
+                    "Descuento": 20.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/yerba-mate-cruz-de-malta-tradicional-sin-tacc-1-kg-284175/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -7771,10 +7835,10 @@
                     "Link": "https://www.vea.com.ar/mate-tradicional-sin-tacc-cruz-de-malta-1-kg/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 5199.0,
-            "Diferencia_Porcentual": 8.0,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 4160.0,
+            "Diferencia_Porcentual": 26.4,
+            "Disponible_En": 4
         },
         {
             "Id": "row_214",
@@ -7828,6 +7892,14 @@
             "Grupo": "Cruz de Malta",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2160,
+                    "Precio_Lista": 2700,
+                    "Descuento": 20.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/yerba-tradicional-cruz-de-malta-sin-tacc-500-gr-260948/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -7861,10 +7933,10 @@
                     "Link": "https://www.vea.com.ar/yerba-tradicional-sin-tacc-cruz-de-malta-500-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 2699.0,
-            "Diferencia_Porcentual": 8.5,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 2160.0,
+            "Diferencia_Porcentual": 26.8,
+            "Disponible_En": 4
         },
         {
             "Id": "row_216",
@@ -8457,6 +8529,14 @@
             "Grupo": "Don Vicente",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3950,
+                    "Precio_Lista": 3950,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-caseritos-don-vicente-500-gr-99900/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3942,
                     "Precio_Lista": 3942,
@@ -8493,7 +8573,7 @@
             "Ganador": "Jumbo",
             "MejorPrecio": 3942.0,
             "Diferencia_Porcentual": 1.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_233",
@@ -9052,6 +9132,14 @@
             "Grupo": "Don Vicente",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3950,
+                    "Precio_Lista": 3950,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-fetuccini-don-vicente-500-gr-299846/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3942,
                     "Precio_Lista": 3942,
@@ -9088,7 +9176,7 @@
             "Ganador": "Jumbo",
             "MejorPrecio": 3942.0,
             "Diferencia_Porcentual": 1.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_249",
@@ -9097,6 +9185,14 @@
             "Grupo": "Don Vicente",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4570,
+                    "Precio_Lista": 4570,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-fettuccini-don-vicente-espinaca-500-gr-260416/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4850,
                     "Precio_Lista": 4850,
@@ -9133,7 +9229,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4569.0,
             "Diferencia_Porcentual": 8.6,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_250",
@@ -9230,6 +9326,14 @@
             "Grupo": "Don Vicente",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3950,
+                    "Precio_Lista": 3950,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-tallarin-don-vicente-500-gr-299848/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3942,
                     "Precio_Lista": 3942,
@@ -9266,7 +9370,7 @@
             "Ganador": "Jumbo",
             "MejorPrecio": 3942.0,
             "Diferencia_Porcentual": 1.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_253",
@@ -9275,6 +9379,14 @@
             "Grupo": "Don Vicente",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3950,
+                    "Precio_Lista": 3950,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-al-huevo-tirabuzon-don-vicente-500-gr-180338/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3942,
                     "Precio_Lista": 3942,
@@ -9311,7 +9423,7 @@
             "Ganador": "Jumbo",
             "MejorPrecio": 3942.0,
             "Diferencia_Porcentual": 1.2,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_254",
@@ -10160,6 +10272,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4200,
+                    "Precio_Lista": 4200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/polvo-bizcochuelo-coco-exquisita-540-gr-301239/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4450,
                     "Precio_Lista": 4450,
@@ -10196,7 +10316,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4190.0,
             "Diferencia_Porcentual": 6.9,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_281",
@@ -10205,6 +10325,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4200,
+                    "Precio_Lista": 4200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/bizcochuelo-naranja-fortificado-exquisita-540-gr-301237/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4450,
                     "Precio_Lista": 4450,
@@ -10241,7 +10369,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4190.0,
             "Diferencia_Porcentual": 6.9,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_282",
@@ -10295,6 +10423,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4905,
+                    "Precio_Lista": 4905,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/bizcochuelo-chocolate-fort-exquisita-540-gr-300868/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5200,
                     "Precio_Lista": 5200,
@@ -10331,7 +10467,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4890.0,
             "Diferencia_Porcentual": 7.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_284",
@@ -10465,6 +10601,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5460,
+                    "Precio_Lista": 5460,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/bizcochuelo-sin-tacc-vainilla-exquisita-450-gr-55729/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -10498,9 +10642,10 @@
                     "Link": "https://www.vea.com.ar/bizcochuelo-vainilla-exquisita-sin-tacc-x-450-gr/p"
                 }
             },
-            "Ganador": "Exclusivo Carrefour",
-            "MejorPrecio": 5775.0,
-            "Disponible_En": 1
+            "Ganador": "Dia",
+            "MejorPrecio": 5460.0,
+            "Diferencia_Porcentual": 5.5,
+            "Disponible_En": 2
         },
         {
             "Id": "row_288",
@@ -10509,6 +10654,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4200,
+                    "Precio_Lista": 4200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/bizcochuelo-vainilla-fortificado-exquisita-540-gr-300382/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4450,
                     "Precio_Lista": 4450,
@@ -10545,7 +10698,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4190.0,
             "Diferencia_Porcentual": 6.9,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_289",
@@ -10796,6 +10949,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5745,
+                    "Precio_Lista": 5745,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-brownies-fortificado-exquisita-425-gr-301032/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6100,
                     "Precio_Lista": 6100,
@@ -10832,7 +10993,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 5690.0,
             "Diferencia_Porcentual": 6.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_296",
@@ -11142,6 +11303,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3700,
+                    "Precio_Lista": 3700,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-exquisita-cookies-con-chips-de-chocolate-300-gr-278531/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3900,
                     "Precio_Lista": 3900,
@@ -11175,10 +11344,10 @@
                     "Link": "https://www.vea.com.ar/cookies-exquisita-chocolate-con-chips-300gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3890.0,
-            "Diferencia_Porcentual": 0.3,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 3700.0,
+            "Diferencia_Porcentual": 5.1,
+            "Disponible_En": 4
         },
         {
             "Id": "row_306",
@@ -11267,6 +11436,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3700,
+                    "Precio_Lista": 3700,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-exquisita-cookies-de-vainilla-con-chips-de-chocolate-300-gr-278532/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -11300,10 +11477,10 @@
                     "Link": "https://www.vea.com.ar/cookies-exquisita-vainilla-con-chips-300gr/p"
                 }
             },
-            "Ganador": "Disco",
-            "MejorPrecio": 3750.0,
-            "Diferencia_Porcentual": 3.6,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 3700.0,
+            "Diferencia_Porcentual": 4.9,
+            "Disponible_En": 3
         },
         {
             "Id": "row_309",
@@ -12212,6 +12389,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1760,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/polvo-exquisita-postre-de-chocolate-80-gr-219163/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1750,
                     "Precio_Lista": 1750,
@@ -12245,10 +12430,10 @@
                     "Link": "https://www.vea.com.ar/exquisita-postre-chocolate-x80-gr-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1590.0,
-            "Diferencia_Porcentual": 11.7,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1320.0,
+            "Diferencia_Porcentual": 26.7,
+            "Disponible_En": 5
         },
         {
             "Id": "row_333",
@@ -12425,6 +12610,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 990,
+                    "Precio_Lista": 1320,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/flan-en-sobre-exquisita-dulce-de-leche-40-gr-276963/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1500,
                     "Precio_Lista": 1500,
@@ -12458,10 +12651,10 @@
                     "Link": "https://www.vea.com.ar/flan-dulce-de-leche-sobre-exquisita-40-gr-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1390.0,
-            "Diferencia_Porcentual": 7.3,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 990.0,
+            "Diferencia_Porcentual": 34.0,
+            "Disponible_En": 4
         },
         {
             "Id": "row_338",
@@ -12750,6 +12943,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 990,
+                    "Precio_Lista": 1320,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/flan-en-sobre-exquisita-vainilla-40-gr-276964/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1450,
                     "Precio_Lista": 1450,
@@ -12783,10 +12984,10 @@
                     "Link": "https://www.vea.com.ar/flan-exquisita-vainilla-sobre-40gr-2/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 1319.0,
-            "Diferencia_Porcentual": 12.1,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 990.0,
+            "Diferencia_Porcentual": 34.0,
+            "Disponible_En": 5
         },
         {
             "Id": "row_347",
@@ -13003,6 +13204,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-cereza-exquisita-25-gr-312750/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -13039,7 +13248,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 1319.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_354",
@@ -13092,6 +13301,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-durazno-exquisita-25-gr-312703/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1350,
                     "Precio_Lista": 1350,
@@ -13128,7 +13345,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1290.0,
             "Diferencia_Porcentual": 4.4,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_356",
@@ -13297,6 +13514,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 756,
+                    "Precio_Lista": 1260,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-cereza-regular-forti-exquisita-40-gr-32543/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -13330,9 +13555,9 @@
                     "Link": "https://www.vea.com.ar/gelatina-exquisita-cereza-fort-x-40-gr/p"
                 }
             },
-            "Ganador": "Sin precio",
-            "MejorPrecio": 0,
-            "Disponible_En": 0
+            "Ganador": "Exclusivo Dia",
+            "MejorPrecio": 756.0,
+            "Disponible_En": 1
         },
         {
             "Id": "row_361",
@@ -13569,6 +13794,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 756,
+                    "Precio_Lista": 1260,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-regular-durazno-forti-exquisita-40-gr-58254/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1350,
                     "Precio_Lista": 1350,
@@ -13602,10 +13835,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-exquisita-durazno-fort-x-40-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1290.0,
-            "Diferencia_Porcentual": 4.4,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 756.0,
+            "Diferencia_Porcentual": 44.0,
+            "Disponible_En": 4
         },
         {
             "Id": "row_369",
@@ -15562,6 +15795,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 756,
+                    "Precio_Lista": 1260,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-frutilla-regular-exquisita-40-gr-300381/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15595,9 +15836,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-frutilla-exquisita-x-40-gr/p"
                 }
             },
-            "Ganador": "Exclusivo Vea",
-            "MejorPrecio": 1305.0,
-            "Disponible_En": 1
+            "Ganador": "Dia",
+            "MejorPrecio": 756.0,
+            "Diferencia_Porcentual": 42.1,
+            "Disponible_En": 2
         },
         {
             "Id": "row_425",
@@ -15606,6 +15848,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-frambuesa-exquisita-25-gr-312749/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15642,7 +15892,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 1319.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_426",
@@ -15651,6 +15901,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-frutilla-exquisita-25-gr-312748/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15687,7 +15945,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 1319.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_427",
@@ -15696,6 +15954,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-light-cereza-forti-exquisita-25-gr-32544/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15732,7 +15998,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 1319.0,
             "Diferencia_Porcentual": 5.1,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_428",
@@ -15785,6 +16051,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-light-durazno-forti-exquisita-25-gr-58252/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15821,7 +16095,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 1319.0,
             "Diferencia_Porcentual": 5.1,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_430",
@@ -15866,6 +16140,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-light-frutilla-forti-exquisita-25-gr-32542/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1450,
                     "Precio_Lista": 1450,
@@ -15899,10 +16181,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-light-frutilla-x-22-grs-exquisita/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 1320.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_432",
@@ -15955,6 +16237,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1320,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-naranja-exquisita-25-gr-312704/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -15988,9 +16278,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-naranja-x-25-grs-exquisita/p"
                 }
             },
-            "Ganador": "Exclusivo Vea",
-            "MejorPrecio": 1390.0,
-            "Disponible_En": 1
+            "Ganador": "Dia",
+            "MejorPrecio": 1320.0,
+            "Diferencia_Porcentual": 5.0,
+            "Disponible_En": 2
         },
         {
             "Id": "row_434",
@@ -15999,6 +16290,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 756,
+                    "Precio_Lista": 1260,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-frambuesa-exquisita-40-gr-300345/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -16032,9 +16331,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-frambuesa-exquisita-x-40-gr/p"
                 }
             },
-            "Ganador": "Exclusivo Disco",
-            "MejorPrecio": 1450.0,
-            "Disponible_En": 1
+            "Ganador": "Dia",
+            "MejorPrecio": 756.0,
+            "Diferencia_Porcentual": 47.9,
+            "Disponible_En": 2
         },
         {
             "Id": "row_435",
@@ -16043,6 +16343,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 756,
+                    "Precio_Lista": 1260,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/gelatina-regular-naranja-forti-exquisita-40-gr-58253/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1350,
                     "Precio_Lista": 1350,
@@ -16076,10 +16384,10 @@
                     "Link": "https://www.vea.com.ar/gelatina-exquisita-naranja-fort-x-40-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1290.0,
-            "Diferencia_Porcentual": 4.4,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 756.0,
+            "Diferencia_Porcentual": 44.0,
+            "Disponible_En": 3
         },
         {
             "Id": "row_436",
@@ -17173,6 +17481,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2201,
+                    "Precio_Lista": 2935,
+                    "Descuento": 25.01,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/mousse-de-chocolate-exquisita-95-gr-36836/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -17206,10 +17522,10 @@
                     "Link": "https://www.vea.com.ar/mousse-de-chocolate-exquisita-x-95-gr-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 2890.0,
-            "Diferencia_Porcentual": 8.3,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 2201.0,
+            "Diferencia_Porcentual": 30.1,
+            "Disponible_En": 4
         },
         {
             "Id": "row_469",
@@ -17218,6 +17534,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2201,
+                    "Precio_Lista": 2935,
+                    "Descuento": 25.01,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/mousse-dulce-de-leche-exquisita-95-gr-49077/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3150,
                     "Precio_Lista": 3150,
@@ -17251,10 +17575,10 @@
                     "Link": "https://www.vea.com.ar/mousse-dulce-de-leche-exquisita-x-95-gr-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 2890.0,
-            "Diferencia_Porcentual": 8.3,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 2201.0,
+            "Diferencia_Porcentual": 30.1,
+            "Disponible_En": 5
         },
         {
             "Id": "row_470",
@@ -18417,6 +18741,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1320,
+                    "Precio_Lista": 1760,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/polvo-para-postre-sabor-chocolate-exquisita-65-gr-102569/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1750,
                     "Precio_Lista": 1750,
@@ -18450,10 +18782,10 @@
                     "Link": "https://www.vea.com.ar/postre-light-sabor-chocolate-exquisita-x-65-g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1590.0,
-            "Diferencia_Porcentual": 11.7,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1320.0,
+            "Diferencia_Porcentual": 26.7,
+            "Disponible_En": 5
         },
         {
             "Id": "row_503",
@@ -18507,6 +18839,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 990,
+                    "Precio_Lista": 1320,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/polvo-para-postre-de-vainilla-exquisita-50-gr-61747/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1450,
                     "Precio_Lista": 1450,
@@ -18540,10 +18880,10 @@
                     "Link": "https://www.vea.com.ar/postre-light-sabor-vainilla-exquisita-x50-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1390.0,
-            "Diferencia_Porcentual": 4.1,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 990.0,
+            "Diferencia_Porcentual": 31.7,
+            "Disponible_En": 4
         },
         {
             "Id": "row_505",
@@ -18552,6 +18892,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 990,
+                    "Precio_Lista": 1320,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/postre-en-polvo-dulce-de-leche-exquisita-80-gr-36821/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1650,
                     "Precio_Lista": 1650,
@@ -18585,10 +18933,10 @@
                     "Link": "https://www.vea.com.ar/exquisita-postre-dulce-de-leche-x80-gr-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1290.0,
-            "Diferencia_Porcentual": 21.8,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 990.0,
+            "Diferencia_Porcentual": 40.0,
+            "Disponible_En": 5
         },
         {
             "Id": "row_506",
@@ -18597,6 +18945,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 990,
+                    "Precio_Lista": 1320,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/postre-exquisita-vainilla-8-porciones-80-gr-232072/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1650,
                     "Precio_Lista": 1650,
@@ -18630,10 +18986,10 @@
                     "Link": "https://www.vea.com.ar/postre-vainilla-exquisita-x-80-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1290.0,
-            "Diferencia_Porcentual": 21.8,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 990.0,
+            "Diferencia_Porcentual": 40.0,
+            "Disponible_En": 5
         },
         {
             "Id": "row_507",
@@ -18826,6 +19182,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5745,
+                    "Precio_Lista": 5745,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premez-torta-hum-cho-exqu-450-gr-308598/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6200,
                     "Precio_Lista": 6200,
@@ -18859,10 +19223,10 @@
                     "Link": "https://www.vea.com.ar/torta-exquisita-humeda-choco-x450g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 5990.0,
-            "Diferencia_Porcentual": 4.9,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 5745.0,
+            "Diferencia_Porcentual": 8.8,
+            "Disponible_En": 4
         },
         {
             "Id": "row_514",
@@ -19107,6 +19471,14 @@
             "Grupo": "Exquisita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5745,
+                    "Precio_Lista": 5745,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-torta-chip-exqui-500-gr-308597/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6200,
                     "Precio_Lista": 6200,
@@ -19140,10 +19512,10 @@
                     "Link": "https://www.vea.com.ar/torta-exquisita-chips-x500g/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 5745.0,
             "Diferencia_Porcentual": 8.8,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_522",
@@ -19328,6 +19700,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1600,
+                    "Precio_Lista": 2340,
+                    "Descuento": 31.62,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/alfajor-arroz-dulce-de-leche-gallo-132-gr-310266/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2500,
                     "Precio_Lista": 2500,
@@ -19361,10 +19741,10 @@
                     "Link": "https://www.vea.com.ar/alfajor-super-dulce-de-leche-x-36-grs-chocoarroz/p"
                 }
             },
-            "Ganador": "Empate",
-            "MejorPrecio": 2500.0,
-            "Diferencia_Porcentual": 0.0,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 1600.0,
+            "Diferencia_Porcentual": 36.0,
+            "Disponible_En": 3
         },
         {
             "Id": "row_529",
@@ -19373,6 +19753,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1600,
+                    "Precio_Lista": 2340,
+                    "Descuento": 31.62,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/alfajor-arroz-pistacho-gallo-28-gr-310267/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -19406,10 +19794,10 @@
                     "Link": "https://www.vea.com.ar/alfajor-pistacho-x-28-grs-chocoarroz/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 2340.0,
-            "Diferencia_Porcentual": 6.4,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 1600.0,
+            "Diferencia_Porcentual": 36.0,
+            "Disponible_En": 3
         },
         {
             "Id": "row_530",
@@ -19462,6 +19850,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2340,
+                    "Precio_Lista": 3600,
+                    "Descuento": 35.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-carnaroli-gallo-oro-1-kg-298832/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3950,
                     "Precio_Lista": 3950,
@@ -19495,10 +19891,10 @@
                     "Link": "https://www.vea.com.ar/arroz-carnaroli-gallo-x500-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3890.0,
-            "Diferencia_Porcentual": 1.5,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 2340.0,
+            "Diferencia_Porcentual": 40.8,
+            "Disponible_En": 4
         },
         {
             "Id": "row_532",
@@ -19551,6 +19947,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1098,
+                    "Precio_Lista": 2225,
+                    "Descuento": 50.65,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-doble-carolina-gallo-500-gr-85234/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2450,
                     "Precio_Lista": 2450,
@@ -19584,10 +19988,10 @@
                     "Link": "https://www.vea.com.ar/arroz-doble-carolina-gallo-500-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 2225.0,
-            "Diferencia_Porcentual": 9.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1098.0,
+            "Diferencia_Porcentual": 55.2,
+            "Disponible_En": 5
         },
         {
             "Id": "row_534",
@@ -21597,6 +22001,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1020,
+                    "Precio_Lista": 1570,
+                    "Descuento": 35.03,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-parboil-seleccion-gallo-500-gr-300835/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1750,
                     "Precio_Lista": 1750,
@@ -21630,10 +22042,10 @@
                     "Link": "https://www.vea.com.ar/arroz-gallo-parboil-selec-x-500-gr-gallo/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 1566.0,
-            "Diferencia_Porcentual": 10.5,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1020.0,
+            "Diferencia_Porcentual": 41.7,
+            "Disponible_En": 5
         },
         {
             "Id": "row_593",
@@ -21815,6 +22227,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 897,
+                    "Precio_Lista": 1380,
+                    "Descuento": 35.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-largo-fino-gallo-500-gr-56938/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1700,
                     "Precio_Lista": 1700,
@@ -21848,10 +22268,10 @@
                     "Link": "https://www.vea.com.ar/arroz-gallo-largo-fino-selec-x500g/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 1379.0,
-            "Diferencia_Porcentual": 18.9,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 897.0,
+            "Diferencia_Porcentual": 47.2,
+            "Disponible_En": 5
         },
         {
             "Id": "row_599",
@@ -21860,6 +22280,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1937,
+                    "Precio_Lista": 2980,
+                    "Descuento": 35.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-parboil-gallo-1-kg-295459/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2973,
                     "Precio_Lista": 2973,
@@ -21893,10 +22321,10 @@
                     "Link": "https://www.vea.com.ar/arroz-parboil-en-bolsa-1-kg-gallo-oro/p"
                 }
             },
-            "Ganador": "Jumbo",
-            "MejorPrecio": 2973.0,
-            "Diferencia_Porcentual": 9.6,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1937.0,
+            "Diferencia_Porcentual": 41.1,
+            "Disponible_En": 5
         },
         {
             "Id": "row_600",
@@ -22030,6 +22458,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1033,
+                    "Precio_Lista": 1590,
+                    "Descuento": 35.03,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-integral-seleccionado-gallo-500-gr-300839/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1750,
                     "Precio_Lista": 1750,
@@ -22063,10 +22499,10 @@
                     "Link": "https://www.vea.com.ar/arroz-gallo-integral-selec-x-500-gr-gallo/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1690.0,
-            "Diferencia_Porcentual": 3.4,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 1033.0,
+            "Diferencia_Porcentual": 41.0,
+            "Disponible_En": 4
         },
         {
             "Id": "row_604",
@@ -22644,6 +23080,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3300,
+                    "Precio_Lista": 3300,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-preparado-con-vegetales-gallo-240-gr-300146/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3550,
                     "Precio_Lista": 3550,
@@ -22680,7 +23124,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 3299.0,
             "Diferencia_Porcentual": 7.1,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_619",
@@ -22814,6 +23258,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2340,
+                    "Precio_Lista": 3600,
+                    "Descuento": 35.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-yamani-estuche-gallo-500-gr-307586/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -22847,9 +23299,9 @@
                     "Link": "https://www.vea.com.ar/arroz-yamani-gallo-x500-gr/p"
                 }
             },
-            "Ganador": "Sin precio",
-            "MejorPrecio": 0,
-            "Disponible_En": 0
+            "Ganador": "Exclusivo Dia",
+            "MejorPrecio": 2340.0,
+            "Disponible_En": 1
         },
         {
             "Id": "row_623",
@@ -28418,6 +28870,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4500,
+                    "Precio_Lista": 4500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/risotto-pronto-4-quesos-gallo-240-gr-299701/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4850,
                     "Precio_Lista": 4850,
@@ -28454,7 +28914,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4499.0,
             "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_775",
@@ -28698,6 +29158,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1800,
+                    "Precio_Lista": 1800,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "2x$2400",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/oblea-de-arroz-gallo-20-gr-205793/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -28731,10 +29199,10 @@
                     "Link": "https://www.vea.com.ar/snacks-de-arroz-limon-20-gr-oblea-gallo/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1890.0,
-            "Diferencia_Porcentual": 3.1,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 1800.0,
+            "Diferencia_Porcentual": 7.7,
+            "Disponible_En": 4
         },
         {
             "Id": "row_782",
@@ -28743,6 +29211,14 @@
             "Grupo": "Gallo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1800,
+                    "Precio_Lista": 1800,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "2x$2400",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/oblea-de-arroz-gallo-chocobar-20-gr-215554/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -28776,10 +29252,10 @@
                     "Link": "https://www.vea.com.ar/snacks-gallo-chocobar-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1890.0,
-            "Diferencia_Porcentual": 3.1,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 1800.0,
+            "Diferencia_Porcentual": 7.7,
+            "Disponible_En": 4
         },
         {
             "Id": "row_783",
@@ -31615,6 +32091,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5605,
+                    "Precio_Lista": 5605,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/espinaca-congelada-granja-del-sol-500-gr-182651/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6150,
                     "Precio_Lista": 6150,
@@ -31651,7 +32135,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 5599.0,
             "Diferencia_Porcentual": 9.0,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_863",
@@ -33269,6 +33753,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5530,
+                    "Precio_Lista": 5530,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/milanesas-de-soja-con-calabaza-granja-del-sol-330-gr-135669/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5950,
                     "Precio_Lista": 5950,
@@ -33305,7 +33797,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4146.0,
             "Diferencia_Porcentual": 31.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_909",
@@ -33350,6 +33842,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5530,
+                    "Precio_Lista": 5530,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/milanesa-soja-con-espinaca-mas-crocantes-granja-del-sol-330-gr-123077/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5950,
                     "Precio_Lista": 5950,
@@ -33386,7 +33886,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4146.0,
             "Diferencia_Porcentual": 30.3,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_911",
@@ -33675,6 +34175,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5500,
+                    "Precio_Lista": 5500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/milanesas-de-soja-tipo-caseras-granja-del-sol-330-gr-293860/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5950,
                     "Precio_Lista": 5950,
@@ -33711,7 +34219,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4124.0,
             "Diferencia_Porcentual": 30.7,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_920",
@@ -34836,6 +35344,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 6867,
+                    "Precio_Lista": 11445,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/nuggets-de-pollo-granja-del-sol-400-gr-293859/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 11650,
                     "Precio_Lista": 11650,
@@ -34869,10 +35385,10 @@
                     "Link": "https://www.vea.com.ar/nuggets-granja-del-sol-400-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 11445.0,
-            "Diferencia_Porcentual": 7.7,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 6867.0,
+            "Diferencia_Porcentual": 44.6,
+            "Disponible_En": 5
         },
         {
             "Id": "row_948",
@@ -34881,6 +35397,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 14031,
+                    "Precio_Lista": 23385,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/nuggets-de-pollo-granja-del-sol-900-gr-309279/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 23850,
                     "Precio_Lista": 23850,
@@ -34914,10 +35438,10 @@
                     "Link": "https://www.vea.com.ar/nuggets-granja-del-sol-900-gr/p"
                 }
             },
-            "Ganador": "Jumbo",
-            "MejorPrecio": 23850.0,
-            "Diferencia_Porcentual": 4.2,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 14031.0,
+            "Diferencia_Porcentual": 43.7,
+            "Disponible_En": 3
         },
         {
             "Id": "row_949",
@@ -35126,6 +35650,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 26935,
+                    "Precio_Lista": 26935,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/patitas-de-pollo-granja-del-sol-1-1-kg-20328/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 27600,
                     "Precio_Lista": 27600,
@@ -35159,10 +35691,10 @@
                     "Link": "https://www.vea.com.ar/patitas-de-pollo-granja-del-sol-1100-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 26935.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_956",
@@ -35677,6 +36209,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 9065,
+                    "Precio_Lista": 9065,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/patitas-rebozadas-de-pollo-originales-400-gr-20331/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 9350,
                     "Precio_Lista": 9350,
@@ -35713,7 +36253,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 8890.0,
             "Diferencia_Porcentual": 4.9,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_971",
@@ -36479,6 +37019,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 10015,
+                    "Precio_Lista": 10015,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/patitas-de-pollo-granja-del-sol-400-gr-35789/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 10600,
                     "Precio_Lista": 10600,
@@ -36512,10 +37060,10 @@
                     "Link": "https://www.vea.com.ar/patitas-de-pollo-granja-del-sol-400-gr-2/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 10015.0,
             "Diferencia_Porcentual": 5.5,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_995",
@@ -36963,6 +37511,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 9900,
+                    "Precio_Lista": 9900,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/relleno-tarta-de-espinacas-granja-del-sol-550-gr-312707/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 10600,
                     "Precio_Lista": 10600,
@@ -36999,7 +37555,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 9449.0,
             "Diferencia_Porcentual": 10.9,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_1009",
@@ -37072,6 +37628,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 11000,
+                    "Precio_Lista": 11000,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/relleno-fajitas-pollovegetales-granja-del-sol-500-gr-312706/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 11650,
                     "Precio_Lista": 11650,
@@ -37108,7 +37672,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 10999.0,
             "Diferencia_Porcentual": 5.6,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_1012",
@@ -37465,6 +38029,14 @@
             "Grupo": "Granja del Sol",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 6719,
+                    "Precio_Lista": 11199,
+                    "Descuento": 40.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/supremas-de-pollo-granja-del-sol-360-gr-293858/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 11450,
                     "Precio_Lista": 11450,
@@ -37498,10 +38070,10 @@
                     "Link": "https://www.vea.com.ar/suprema-de-pollo-granja-del-sol-360-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 11199.0,
-            "Diferencia_Porcentual": 4.2,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 6719.0,
+            "Diferencia_Porcentual": 42.5,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1022",
@@ -39960,6 +40532,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4550,
+                    "Precio_Lista": 4550,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/ravioles-4-quesos-la-saltena-450-gr-143116/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4750,
                     "Precio_Lista": 4750,
@@ -39996,7 +40576,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4490.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1095",
@@ -41551,6 +42131,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4550,
+                    "Precio_Lista": 4550,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/ravioles-jamon---muzzarela-la-saltena-450-gr-265795/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4750,
                     "Precio_Lista": 4750,
@@ -41587,7 +42175,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4490.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1138",
@@ -43397,6 +43985,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4515,
+                    "Precio_Lista": 4515,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapas-de-empanada-la-saltena-criolla-605-gr-263498/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4515,
                     "Precio_Lista": 4515,
@@ -43433,7 +44029,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4399.0,
             "Diferencia_Porcentual": 2.6,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_1188",
@@ -43442,6 +44038,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2600,
+                    "Precio_Lista": 2600,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapa-empanada-criolla-la-saltena-12-ud-300352/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2800,
                     "Precio_Lista": 2800,
@@ -43478,7 +44082,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2535.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_1189",
@@ -43532,6 +44136,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2600,
+                    "Precio_Lista": 2600,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapa-para-empanadas-horno-la-saltena-12-ud-300351/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2800,
                     "Precio_Lista": 2800,
@@ -43568,7 +44180,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2535.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1191",
@@ -43883,6 +44495,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4515,
+                    "Precio_Lista": 4515,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapas-de-empanada-la-saltena-hojaldre-605-gr-263626/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4515,
                     "Precio_Lista": 4515,
@@ -43919,7 +44539,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 4399.0,
             "Diferencia_Porcentual": 4.2,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_1200",
@@ -46223,6 +46843,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1840,
+                    "Precio_Lista": 2840,
+                    "Descuento": 35.21,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapas-para-tarta-criolla-la-saltena-400-gr-49496/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2950,
                     "Precio_Lista": 2950,
@@ -46256,10 +46884,10 @@
                     "Link": "https://www.vea.com.ar/tapas-para-tarta-la-saltena-criolla-400g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 2790.0,
-            "Diferencia_Porcentual": 5.4,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 1840.0,
+            "Diferencia_Porcentual": 37.6,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1264",
@@ -46268,6 +46896,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1840,
+                    "Precio_Lista": 2840,
+                    "Descuento": 35.21,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tapa-para-tartas-hojaldre-la-saltena-400-gr-51596/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2950,
                     "Precio_Lista": 2950,
@@ -46301,10 +46937,10 @@
                     "Link": "https://www.vea.com.ar/tapas-la-saltena-para-tarta-hojaldradas-400g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 2790.0,
-            "Diferencia_Porcentual": 5.4,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 1840.0,
+            "Diferencia_Porcentual": 37.6,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1265",
@@ -46525,6 +47161,14 @@
             "Grupo": "La Salteña",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3595,
+                    "Precio_Lista": 3595,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/ñoquis-la-saltena-450-gr-307496/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3850,
                     "Precio_Lista": 3850,
@@ -46561,7 +47205,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 3590.0,
             "Diferencia_Porcentual": 9.1,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1273",
@@ -49427,6 +50071,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2135,
+                    "Precio_Lista": 2135,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-largo-fino-luchetti-1-kg-299671/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2350,
                     "Precio_Lista": 2350,
@@ -49460,10 +50112,10 @@
                     "Link": "https://www.vea.com.ar/arroz-largo-fino-luchetti-1-kg/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 2135.0,
             "Diferencia_Porcentual": 9.1,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1351",
@@ -49813,6 +50465,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2490,
+                    "Precio_Lista": 2490,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-parboil-bolsa-luchetti-1-kg-299061/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2750,
                     "Precio_Lista": 2750,
@@ -49849,7 +50509,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2489.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1361",
@@ -49858,6 +50518,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 950,
+                    "Precio_Lista": 1315,
+                    "Descuento": 27.76,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/arroz-parboil-bolsa-luchetti-500-gr-299063/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1600,
                     "Precio_Lista": 1600,
@@ -49891,10 +50559,10 @@
                     "Link": "https://www.vea.com.ar/arroz-parboil-luchetti-500-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 1315.0,
-            "Diferencia_Porcentual": 17.8,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 950.0,
+            "Diferencia_Porcentual": 40.6,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1362",
@@ -50859,6 +51527,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4995,
+                    "Precio_Lista": 6500,
+                    "Descuento": 23.15,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/capelettini-jamon-y-queso-lucchetti-500-gr-146981/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6900,
                     "Precio_Lista": 6900,
@@ -50892,10 +51568,10 @@
                     "Link": "https://www.vea.com.ar/capeletis-lucchetti-jamon-y-queso-500gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 6499.0,
-            "Diferencia_Porcentual": 7.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 4995.0,
+            "Diferencia_Porcentual": 28.6,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1387",
@@ -51351,6 +52027,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2770,
+                    "Precio_Lista": 3465,
+                    "Descuento": 20.06,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fajitas-lucchetti-280-gr-282740/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3850,
                     "Precio_Lista": 3850,
@@ -51384,10 +52068,10 @@
                     "Link": "https://www.vea.com.ar/fajitas-lucchetti-x280g-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3790.0,
-            "Diferencia_Porcentual": 1.6,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 2770.0,
+            "Diferencia_Porcentual": 28.1,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1401",
@@ -51663,6 +52347,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1850,
+                    "Precio_Lista": 1850,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-lucchetti-dedalitos-500-gr-287522/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -51699,7 +52391,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1790.0,
             "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1408",
@@ -51708,6 +52400,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1748,
+                    "Precio_Lista": 1748,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-spaghetti-n7-luchetti-500-gr-40877/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -51741,10 +52441,10 @@
                     "Link": "https://www.vea.com.ar/fideos-guiser-lucchetti-spaghetti-500gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1790.0,
-            "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1748.0,
+            "Diferencia_Porcentual": 10.4,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1409",
@@ -52137,6 +52837,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1749,
+                    "Precio_Lista": 1749,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-penne-rigate-n45-luchetti-500-gr-40878/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2050,
                     "Precio_Lista": 2050,
@@ -52170,10 +52878,10 @@
                     "Link": "https://www.vea.com.ar/fideos-lucchetti-penne-rigatex500g-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1790.0,
-            "Diferencia_Porcentual": 12.7,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1749.0,
+            "Diferencia_Porcentual": 14.7,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1419",
@@ -52432,6 +53140,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1749,
+                    "Precio_Lista": 1749,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-tallarin-n5-luchetti-500-gr-299670/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -52465,10 +53181,10 @@
                     "Link": "https://www.vea.com.ar/fideos-lucchetti-tallarin-n5-x500g-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1790.0,
-            "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1749.0,
+            "Diferencia_Porcentual": 10.3,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1426",
@@ -52522,6 +53238,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2379,
+                    "Precio_Lista": 2379,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-tirabuzon-3-vegetales-n34-luchetti-500-gr-249265/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2550,
                     "Precio_Lista": 2550,
@@ -52555,10 +53279,10 @@
                     "Link": "https://www.vea.com.ar/fideos-vegetales-lucchetti-tirabuzon-500gr/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 2379.0,
             "Diferencia_Porcentual": 6.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1428",
@@ -52603,6 +53327,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1749,
+                    "Precio_Lista": 1749,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tirabuzon-n-34-luchetti-500-gr-144397/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -52636,10 +53368,10 @@
                     "Link": "https://www.vea.com.ar/fideos-guiser-lucchetti-tirabuzon-500gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1790.0,
-            "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1749.0,
+            "Diferencia_Porcentual": 10.3,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1430",
@@ -52868,6 +53600,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1850,
+                    "Precio_Lista": 1850,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-letritas-lucchetti-500-gr-66085/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -52901,9 +53641,10 @@
                     "Link": "https://www.vea.com.ar/fideos-letritas-lucchetti-x500-gr/p"
                 }
             },
-            "Ganador": "Exclusivo Carrefour",
+            "Ganador": "Carrefour",
             "MejorPrecio": 1849.0,
-            "Disponible_En": 1
+            "Diferencia_Porcentual": 0.1,
+            "Disponible_En": 2
         },
         {
             "Id": "row_1436",
@@ -53000,6 +53741,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1749,
+                    "Precio_Lista": 1749,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-mostachol-n51-luchetti-500-gr-299669/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1950,
                     "Precio_Lista": 1950,
@@ -53033,10 +53782,10 @@
                     "Link": "https://www.vea.com.ar/fideos-guiser-lucchetti-mostachol-500gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 1790.0,
-            "Diferencia_Porcentual": 8.2,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1749.0,
+            "Diferencia_Porcentual": 10.3,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1439",
@@ -53843,6 +54592,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 8840,
+                    "Precio_Lista": 8840,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/milanesa-de-soja-grande-luchetti-560-gr-298711/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 9450,
                     "Precio_Lista": 9450,
@@ -53879,7 +54636,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 8839.0,
             "Diferencia_Porcentual": 8.9,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1459",
@@ -54149,6 +54906,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1700,
+                    "Precio_Lista": 1700,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pan-rallado-lucchetti-500-gr-256949/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 1800,
                     "Precio_Lista": 1800,
@@ -54182,10 +54947,10 @@
                     "Link": "https://www.vea.com.ar/pan-rallado-lucchetti-nutrivit-x500g/p"
                 }
             },
-            "Ganador": "Carrefour",
+            "Ganador": "Empate",
             "MejorPrecio": 1700.0,
             "Diferencia_Porcentual": 5.6,
-            "Disponible_En": 3
+            "Disponible_En": 4
         },
         {
             "Id": "row_1467",
@@ -54283,6 +55048,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4495,
+                    "Precio_Lista": 5990,
+                    "Descuento": 24.96,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-chipa-luchetti-400-gr-264922/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 6400,
                     "Precio_Lista": 6400,
@@ -54316,10 +55089,10 @@
                     "Link": "https://www.vea.com.ar/premezcla-chipa-luchetti-x-400-gr/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 5989.0,
-            "Diferencia_Porcentual": 8.6,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 4495.0,
+            "Diferencia_Porcentual": 31.4,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1470",
@@ -54408,6 +55181,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2100,
+                    "Precio_Lista": 2800,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-torta-frita-luchetti-500-gr-299141/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -54441,10 +55222,10 @@
                     "Link": "https://www.vea.com.ar/premezcla-torta-frita-luchetti-x500-gr/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 2890.0,
-            "Diferencia_Porcentual": 5.2,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 2100.0,
+            "Diferencia_Porcentual": 31.1,
+            "Disponible_En": 3
         },
         {
             "Id": "row_1473",
@@ -54453,6 +55234,14 @@
             "Grupo": "Lucchetti",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2755,
+                    "Precio_Lista": 3675,
+                    "Descuento": 25.03,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/premezcla-para-pizza-luchetti-850-gr-75494/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3950,
                     "Precio_Lista": 3950,
@@ -54486,10 +55275,10 @@
                     "Link": "https://www.vea.com.ar/premezcla-luchetti-pizza-x850g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3790.0,
-            "Diferencia_Porcentual": 5.2,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 2755.0,
+            "Diferencia_Porcentual": 31.1,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1474",
@@ -59570,6 +60359,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 5000,
+                    "Precio_Lista": 5000,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-libre-de-gluten-spaghetti 20-x-500-gr- -99940/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5350,
                     "Precio_Lista": 5350,
@@ -59606,7 +60403,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 4990.0,
             "Diferencia_Porcentual": 8.4,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1621",
@@ -59695,6 +60492,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 1430,
+                    "Precio_Lista": 1430,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/tirabuzon-3-vegetales-n-34-matarazzo-500-gr-110447/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2700,
                     "Precio_Lista": 2700,
@@ -59728,10 +60533,10 @@
                     "Link": "https://www.vea.com.ar/fideos-matarazzo-tirabuzon-34-vegetales-500g/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 2499.0,
-            "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 1430.0,
+            "Diferencia_Porcentual": 47.0,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1624",
@@ -59776,6 +60581,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2500,
+                    "Precio_Lista": 2500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-tirabuzon-integral-n28-matarazzo-500-gr-313870/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2700,
                     "Precio_Lista": 2700,
@@ -59812,7 +60625,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2499.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1626",
@@ -60018,6 +60831,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2200,
+                    "Precio_Lista": 2200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/mostachol-n-52-matarazzo-500-gr-99941/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2197,
                     "Precio_Lista": 2197,
@@ -60054,7 +60875,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1990.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1632",
@@ -60063,6 +60884,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3600,
+                    "Precio_Lista": 3600,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-monos-n°39-15-x-500-gr-66210/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3600,
                     "Precio_Lista": 3600,
@@ -60099,7 +60928,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 3490.0,
             "Diferencia_Porcentual": 5.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1633",
@@ -60153,6 +60982,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3250,
+                    "Precio_Lista": 3250,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-cabello-de-angel-n°89-15-x-500-gr-304511/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3600,
                     "Precio_Lista": 3600,
@@ -60189,7 +61026,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 3249.0,
             "Diferencia_Porcentual": 12.2,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1635",
@@ -60287,6 +61124,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2500,
+                    "Precio_Lista": 2500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-penne-rigate-3-vegetales-n45-matarazzo-500-gr-110890/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2700,
                     "Precio_Lista": 2700,
@@ -60323,7 +61168,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2499.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1638",
@@ -60465,6 +61310,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3600,
+                    "Precio_Lista": 4700,
+                    "Descuento": 23.4,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-alta-prot-penne-rigate-12-x-400-gr-313530/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -60498,9 +61351,9 @@
                     "Link": "https://www.vea.com.ar/fideos-protein-mostachol-400g-matarazzo/p"
                 }
             },
-            "Ganador": "Sin precio",
-            "MejorPrecio": 0,
-            "Disponible_En": 0
+            "Ganador": "Exclusivo Dia",
+            "MejorPrecio": 3600.0,
+            "Disponible_En": 1
         },
         {
             "Id": "row_1642",
@@ -60581,6 +61434,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3040,
+                    "Precio_Lista": 3800,
+                    "Descuento": 20.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/rina-matarazzo-fusil-rina-500-gr-307726/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4050,
                     "Precio_Lista": 4050,
@@ -60614,10 +61475,10 @@
                     "Link": "https://www.vea.com.ar/fideos-rina-fusilli-ce-500g-2/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3890.0,
-            "Diferencia_Porcentual": 6.3,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 3040.0,
+            "Diferencia_Porcentual": 26.7,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1645",
@@ -60671,6 +61532,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3040,
+                    "Precio_Lista": 3800,
+                    "Descuento": 20.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/spaghetti-rina-matarazzo-500-gr-270885/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4050,
                     "Precio_Lista": 4050,
@@ -60704,10 +61573,10 @@
                     "Link": "https://www.vea.com.ar/fideos-rina-spaghetti-ce-500g-2/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 3799.0,
-            "Diferencia_Porcentual": 8.5,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 3040.0,
+            "Diferencia_Porcentual": 26.7,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1647",
@@ -61174,6 +62043,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2200,
+                    "Precio_Lista": 2200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-spaghetti-n3-matarazzo-500-gr-38576/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2197,
                     "Precio_Lista": 2197,
@@ -61210,7 +62087,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1990.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1660",
@@ -61219,6 +62096,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2500,
+                    "Precio_Lista": 2500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-spaghetti-integral-matarazzo-500-gr-71845/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -61255,7 +62140,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2499.0,
             "Diferencia_Porcentual": 7.4,
-            "Disponible_En": 2
+            "Disponible_En": 3
         },
         {
             "Id": "row_1661",
@@ -61300,6 +62185,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2200,
+                    "Precio_Lista": 2200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-tallarin-n°11-20-x-500-gr-42907/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2197,
                     "Precio_Lista": 2197,
@@ -61336,7 +62229,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1990.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1663",
@@ -61674,6 +62567,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2200,
+                    "Precio_Lista": 2200,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/fideos-tirabuzon-n28-matarazzo-500-gr-38574/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2197,
                     "Precio_Lista": 2197,
@@ -61710,7 +62611,7 @@
             "Ganador": "Vea",
             "MejorPrecio": 1990.0,
             "Diferencia_Porcentual": 9.5,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1672",
@@ -61719,6 +62620,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3600,
+                    "Precio_Lista": 4700,
+                    "Descuento": 23.4,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/matarazzo-alta-prot-tirabuzon-12-x-400-gr-313529/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 5000,
                     "Precio_Lista": 5000,
@@ -61752,9 +62661,10 @@
                     "Link": "https://www.vea.com.ar/fideos-protein-tirabuzon-400g-matarazzo/p"
                 }
             },
-            "Ganador": "Exclusivo Jumbo",
-            "MejorPrecio": 5000.0,
-            "Disponible_En": 1
+            "Ganador": "Dia",
+            "MejorPrecio": 3600.0,
+            "Diferencia_Porcentual": 28.0,
+            "Disponible_En": 2
         },
         {
             "Id": "row_1673",
@@ -63454,6 +64364,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 6500,
+                    "Precio_Lista": 6500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/salsa-mediterranea-rina-340-gr-64799/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -63487,9 +64405,9 @@
                     "Link": "https://www.vea.com.ar/salsa-mediterranea-rina-340g/p"
                 }
             },
-            "Ganador": "Sin precio",
-            "MejorPrecio": 0,
-            "Disponible_En": 0
+            "Ganador": "Exclusivo Dia",
+            "MejorPrecio": 6500.0,
+            "Disponible_En": 1
         },
         {
             "Id": "row_1724",
@@ -63498,6 +64416,14 @@
             "Grupo": "Matarazzo",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 6500,
+                    "Precio_Lista": 6500,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/salsa-pomarola-rina-matarazzo-340-gr-64800/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 7100,
                     "Precio_Lista": 7100,
@@ -63531,10 +64457,10 @@
                     "Link": "https://www.vea.com.ar/salsa-pomarola-rina-340g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 6790.0,
-            "Diferencia_Porcentual": 4.4,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 6500.0,
+            "Diferencia_Porcentual": 8.5,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1725",
@@ -63951,6 +64877,14 @@
             "Grupo": "Preferido",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3040,
+                    "Precio_Lista": 3800,
+                    "Descuento": 20.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pan-rallado-preferido-1-kg-104371/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3902,
                     "Precio_Lista": 3902,
@@ -63984,10 +64918,10 @@
                     "Link": "https://www.vea.com.ar/pan-rallado-fortificado-preferido-1-kg/p"
                 }
             },
-            "Ganador": "Disco",
-            "MejorPrecio": 3882.0,
-            "Diferencia_Porcentual": 2.7,
-            "Disponible_En": 4
+            "Ganador": "Dia",
+            "MejorPrecio": 3040.0,
+            "Diferencia_Porcentual": 23.8,
+            "Disponible_En": 5
         },
         {
             "Id": "row_1738",
@@ -63996,6 +64930,14 @@
             "Grupo": "Preferido",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 2100,
+                    "Precio_Lista": 2100,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pan-rallado-fortificado-preferido-500-gr-162447/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 2250,
                     "Precio_Lista": 2250,
@@ -64032,7 +64974,7 @@
             "Ganador": "Carrefour",
             "MejorPrecio": 2099.0,
             "Diferencia_Porcentual": 8.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1739",
@@ -64815,6 +65757,14 @@
             "Grupo": "Preferido",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3990,
+                    "Precio_Lista": 3990,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/rebozador-preferido-1-kg-220994/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3902,
                     "Precio_Lista": 3902,
@@ -64851,7 +65801,7 @@
             "Ganador": "Disco",
             "MejorPrecio": 3882.0,
             "Diferencia_Porcentual": 2.7,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1761",
@@ -64993,6 +65943,14 @@
             "Grupo": "Preferido",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 4900,
+                    "Precio_Lista": 4900,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/rebozador-para-horno-prefe-1-kg-312868/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 4801,
                     "Precio_Lista": 4801,
@@ -65029,7 +65987,7 @@
             "Ganador": "Empate",
             "MejorPrecio": 4801.0,
             "Diferencia_Porcentual": 3.8,
-            "Disponible_En": 4
+            "Disponible_En": 5
         },
         {
             "Id": "row_1765",
@@ -65468,6 +66426,14 @@
             "Grupo": "Preferido",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 3290,
+                    "Precio_Lista": 3290,
+                    "Descuento": 0.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pan-rallado-crunch-fortificado-preferido-450-gr-301007/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 3500,
                     "Precio_Lista": 3500,
@@ -65501,10 +66467,10 @@
                     "Link": "https://www.vea.com.ar/rebozador-preferido-crunch-fortificado-x450g/p"
                 }
             },
-            "Ganador": "Vea",
-            "MejorPrecio": 3390.0,
-            "Diferencia_Porcentual": 5.8,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 3290.0,
+            "Diferencia_Porcentual": 8.6,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1777",
@@ -66362,6 +67328,14 @@
             "Grupo": "Sibarita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 9000,
+                    "Precio_Lista": 12000,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pizza-mozzarella-clasica-sibarita-470-gr-301305/p"
+                },
                 "Jumbo": {
                     "Precio_Final": 13150,
                     "Precio_Lista": 13150,
@@ -66395,10 +67369,10 @@
                     "Link": "https://www.vea.com.ar/pizza-sibarita-mozzarella-clasica-x470g/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 11999.0,
-            "Diferencia_Porcentual": 8.8,
-            "Disponible_En": 3
+            "Ganador": "Dia",
+            "MejorPrecio": 9000.0,
+            "Diferencia_Porcentual": 31.6,
+            "Disponible_En": 4
         },
         {
             "Id": "row_1802",
@@ -66407,6 +67381,14 @@
             "Grupo": "Sibarita",
             "Es_Killer": false,
             "Precios": {
+                "Dia": {
+                    "Precio_Final": 17107,
+                    "Precio_Lista": 22810,
+                    "Descuento": 25.0,
+                    "Stock": "Con Stock",
+                    "Promocion": "",
+                    "Link": "https://diaonline.supermercadosdia.com.ar/pizza-mozzarella-sibarita-2-ud-309244/p"
+                },
                 "Jumbo": {
                     "Precio_Final": "Sin Stock",
                     "Precio_Lista": "Sin Stock",
@@ -66440,10 +67422,10 @@
                     "Link": "https://www.vea.com.ar/pizza-sibarita-mozzarella-x-2-940g/p"
                 }
             },
-            "Ganador": "Carrefour",
-            "MejorPrecio": 22809.0,
-            "Diferencia_Porcentual": 0.2,
-            "Disponible_En": 2
+            "Ganador": "Dia",
+            "MejorPrecio": 17107.0,
+            "Diferencia_Porcentual": 25.1,
+            "Disponible_En": 3
         },
         {
             "Id": "row_1803",
