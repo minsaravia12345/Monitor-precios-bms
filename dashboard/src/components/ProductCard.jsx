@@ -36,6 +36,7 @@ function PharmacyRow({ prod, farmacia }) {
   const precioLista = parseNumero(pData.Precio_Lista);
   const precioFinal = parseNumero(pData.Precio_Final);
   const hayTachado = esListaNum && esFinalNum && precioLista > precioFinal;
+  const descuentoPct = esNumeroValido(pData.Descuento) ? Math.round(parseNumero(pData.Descuento)) : 0;
 
   return (
     <a
@@ -51,12 +52,21 @@ function PharmacyRow({ prod, farmacia }) {
       <div className="price-details">
         <span className={`actual-price ${esFinalNum ? 'currency' : ''} ${isWinner ? 'winner-text' : ''}`}>
           {formatearPrecio(pData.Precio_Final)}
-          {esFinalNum && pData.Descuento > 0 && (
-            <span className="discount-badge">-{pData.Descuento}%</span>
+          {esFinalNum && descuentoPct > 0 && (
+            <span
+              className="discount-badge"
+              title={hayTachado ? `PVP $${formatearPrecio(pData.Precio_Lista)} → Ahora $${formatearPrecio(pData.Precio_Final)}` : `Descuento publicado: ${descuentoPct}%`}
+            >
+              -{descuentoPct}%
+            </span>
           )}
         </span>
-        {hayTachado && <span className="list-price currency">{formatearPrecio(pData.Precio_Lista)}</span>}
-        {pData.Promocion && <span className="promo-tag">{pData.Promocion}</span>}
+        {hayTachado && (
+          <span className="list-price currency">
+            <span className="pvp-label">PVP</span> {formatearPrecio(pData.Precio_Lista)}
+          </span>
+        )}
+        {pData.Promocion && <span className="promo-tag" title={pData.Promocion}>{pData.Promocion}</span>}
       </div>
     </a>
   );

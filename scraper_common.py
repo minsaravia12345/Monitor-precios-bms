@@ -305,6 +305,21 @@ def cargar_productos(ruta=ARCHIVO_PRODUCTOS):
             }
         )
 
+    # El Excel semilla no tiene columna de categoria: filtrar por una
+    # corrida acotada (ej. solo "aceites") se hace por coincidencia de
+    # texto en el nombre, vía SCRAPER_FILTRO_NOMBRE.
+    filtro_nombre = os.environ.get("SCRAPER_FILTRO_NOMBRE")
+    if filtro_nombre:
+        filtro_lower = filtro_nombre.lower()
+        productos = [p for p in productos if filtro_lower in p["nombre_raw"].lower()]
+
+    limite = os.environ.get("SCRAPER_LIMITE")
+    if limite:
+        try:
+            productos = productos[: int(limite)]
+        except ValueError:
+            pass
+
     return productos
 
 
@@ -468,6 +483,17 @@ def _campo_vtex(d, clave):
     return d.get(f"<{clave}>k__BackingField")
 
 
+def _nombres_vtex(lista):
+    """Extrae los 'Name' de una lista de objetos VTEX (Teasers o
+    DiscountHighLight), tolerando el nombrado crudo de .NET."""
+    nombres = []
+    for item in lista or []:
+        nombre = _campo_vtex(item, "Name")
+        if nombre and str(nombre).strip():
+            nombres.append(str(nombre).strip())
+    return nombres
+
+
 def vtex_extraer_promociones(offer):
     """Las promos 'reales' en los supermercados argentinos casi nunca bajan
     el precio de gondola (Price/ListPrice): son descuentos condicionados
@@ -475,13 +501,46 @@ def vtex_extraer_promociones(offer):
     'Teasers', no en el precio. Sin esto, un producto puede mostrar 0% de
     descuento en el dashboard cuando en realidad tiene, por ejemplo,
     'Tarjeta Carrefour 15%' activo ahora mismo."""
-    teasers = offer.get("Teasers") or []
-    nombres = []
-    for teaser in teasers:
-        nombre = _campo_vtex(teaser, "Name")
-        if nombre and str(nombre).strip():
-            nombres.append(str(nombre).strip())
-    return nombres
+    return _nombres_vtex(offer.get("Teasers"))
+
+
+_RE_PORCENTAJE = re.compile(r"(\d{1,3}(?:[.,]\d+)?)\s*%")
+
+
+def _parsear_porcentaje(texto):
+    m = _RE_PORCENTAJE.search(texto)
+    if not m:
+        return None
+    try:
+        return float(m.group(1).replace(",", "."))
+    except ValueError:
+        return None
+
+
+def _es_porcentaje_puro(texto):
+    """True si el texto es solo un numero de porcentaje (ej. '35%'), sin
+    informacion adicional (condiciones, nombre de marca, etc.)."""
+    return re.sub(r"[\d.,%\s-]", "", texto) == ""
+
+
+def vtex_extraer_descuento_publicado(offer):
+    """'DiscountHighLight' es el campo que VTEX usa para la etiqueta/badge
+    de descuento que el sitio muestra en la ficha de producto (el "-35%"
+    en rojo), independiente del par ListPrice/Price. Carrefour y Dia lo
+    usan para marcar un descuento real incluso cuando ListPrice es igual a
+    Price (el descuento ahi vive solo en este campo). Devuelve el mayor
+    porcentaje publicado encontrado y la lista de etiquetas con texto
+    propio (para mostrarlas como promocion)."""
+    nombres = _nombres_vtex(offer.get("DiscountHighLight"))
+    mejor_pct = None
+    etiquetas_con_texto = []
+    for nombre in nombres:
+        pct = _parsear_porcentaje(nombre)
+        if pct is not None and (mejor_pct is None or pct > mejor_pct):
+            mejor_pct = pct
+        if not _es_porcentaje_puro(nombre):
+            etiquetas_con_texto.append(nombre)
+    return mejor_pct, etiquetas_con_texto
 
 
 def vtex_extraer_oferta(sku_item):
@@ -505,6 +564,7 @@ def vtex_extraer_oferta(sku_item):
 
     precio_final = int(float(offer.get("Price", 0) or 0))
     precio_lista = int(float(offer.get("ListPrice", 0) or 0))
+    descuento_publicado, etiquetas_descuento = vtex_extraer_descuento_publicado(offer)
 
     descuento = 0
     if precio_lista > precio_final > 0:
@@ -519,7 +579,17 @@ def vtex_extraer_oferta(sku_item):
             precio_lista = precio_final
             descuento = 0
 
-    promocion = " + ".join(vtex_extraer_promociones(offer))
+    if descuento_publicado and descuento_publicado > descuento:
+        # El sitio publica un % de descuento (el badge rojo de la ficha)
+        # que no esta reflejado en ListPrice/Price -- pasa en Dia y
+        # Carrefour, donde a veces Price ya "absorbe" el descuento y
+        # ListPrice queda igual a Price. Reconstruimos el precio de lista
+        # a partir de ese % publicado en vez de reportar 0% de descuento.
+        descuento = descuento_publicado
+        if precio_lista <= precio_final:
+            precio_lista = round(precio_final / (1 - descuento_publicado / 100))
+
+    promocion = " + ".join(vtex_extraer_promociones(offer) + etiquetas_descuento)
 
     return {
         "Precio_Final": precio_final,
